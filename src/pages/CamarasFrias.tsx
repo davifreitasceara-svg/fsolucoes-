@@ -4,9 +4,6 @@ import { ArrowLeft, Snowflake, CheckCircle } from "lucide-react";
 import camaraFria1 from "@/assets/camara_fria_real_1.jpg";
 import camaraFria2 from "@/assets/camara_fria_real_2.jpg";
 import camaraFria3 from "@/assets/camara_fria_real_3.jpg";
-import camaraFria4 from "@/assets/camara_fria_real_4.jpg";
-import camaraFria5 from "@/assets/camara_fria_real_5.jpg";
-import camaraFria6 from "@/assets/camara_fria_real_6.jpg";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
@@ -21,12 +18,9 @@ const features = [
 ];
 
 const photos = [
-  { src: camaraFria1, alt: "Projeto de câmara fria - F. Soluções" },
-  { src: camaraFria2, alt: "Instalação refrigeração - F. Soluções" },
-  { src: camaraFria3, alt: "Câmara fria comercial - F. Soluções" },
-  { src: camaraFria4, alt: "Projeto frigorífico - F. Soluções" },
-  { src: camaraFria5, alt: "Câmara fria industrial - F. Soluções" },
-  { src: camaraFria6, alt: "Sistema de refrigeração - F. Soluções" },
+  { src: camaraFria1, alt: "Câmaras frigoríficas de hortifruti instaladas" },
+  { src: camaraFria2, alt: "Câmara fria de resfriados com portas de vidro" },
+  { src: camaraFria3, alt: "Equipamento ilha fria Snow Island instalado" },
 ];
 
 export default function CamarasFrias() {
@@ -118,7 +112,11 @@ export default function CamarasFrias() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.15, duration: 0.5 }}
-                className="relative overflow-hidden rounded-2xl border border-white/5 group"
+                className={`relative overflow-hidden rounded-2xl border border-white/5 group ${
+                  i === photos.length - 1 && photos.length % 2 !== 0
+                    ? "md:col-span-2 lg:col-span-1 lg:col-start-2"
+                    : ""
+                }`}
               >
                 <img
                   src={photo.src}
