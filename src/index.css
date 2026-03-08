@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 20% 98%;
+    --foreground: 210 50% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 210 50% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 50% 10%;
+
+    --primary: 195 100% 50%; /* Neon Blue */
+    --primary-foreground: 0 0% 100%;
+
+    --primary-light: 195 100% 65%;
+    --primary-dark: 195 100% 35%;
+
+    --secondary: 210 15% 93%;
+    --secondary-foreground: 210 50% 10%;
+
+    --muted: 210 15% 95%;
+    --muted-foreground: 210 10% 45%;
+
+    --accent: 210 100% 60%; /* True Blue */
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 210 20% 90%;
+    --input: 210 20% 90%;
+    --ring: 207 90% 40%;
+
+    --radius: 0.75rem;
+
+    --gradient-primary: linear-gradient(135deg, hsl(207 90% 40%), hsl(195 90% 45%));
+    --gradient-dark: linear-gradient(135deg, hsl(207 90% 28%), hsl(207 90% 40%));
+    --gradient-hero-overlay: linear-gradient(135deg, hsla(207, 100%, 10%, 0.9), hsla(195, 100%, 20%, 0.75));
+    --shadow-card: 0 4px 30px hsla(195, 100%, 50%, 0.15);
+    --shadow-card-hover: 0 12px 40px hsla(195, 100%, 50%, 0.25);
+    --shadow-button: 0 0 20px hsla(195, 100%, 50%, 0.5);
+  }
+
+  .dark {
+    --background: 220 50% 4%; /* Dark, almost black, blueish background */
+    --foreground: 210 20% 98%; /* Bright text */
+    --card: 220 45% 8%; /* Slightly lighter than background */
+    --card-foreground: 210 20% 98%;
+    --popover: 220 45% 8%;
+    --popover-foreground: 210 20% 98%;
+    --primary: 195 100% 50%; /* Bright Neon Blue (Cyan-ish) */
+    --primary-foreground: 222 47% 11%;
+    --secondary: 217 32% 17%;
+    --secondary-foreground: 210 20% 98%;
+    --muted: 217 32% 17%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 210 100% 60%; /* True Blue */
+    --accent-foreground: 210 20% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217 32% 17%;
+    --input: 217 32% 17%;
+    --ring: 195 100% 50%; /* Neon Blue Ring */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased selection:bg-primary/30;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
+  }
+}
+
+@layer components {
+  .section-padding {
+    @apply py-20 md:py-28 px-4 md:px-8;
+  }
+
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+
+  .gradient-dark {
+    background: var(--gradient-dark);
+  }
+
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+
+  .shadow-button {
+    box-shadow: var(--shadow-button);
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-primary);
+  }
+
+  .glass-card {
+    @apply bg-card/60 backdrop-blur-xl border border-white/10 shadow-2xl;
+  }
+
+  .neon-glow {
+    box-shadow: 0 0 15px hsla(195, 100%, 50%, 0.4), 0 0 30px hsla(195, 100%, 50%, 0.2);
+  }
+
+  .neon-shadow {
+    filter: drop-shadow(0 0 8px hsla(195, 100%, 50%, 0.6));
+  }
+}
+
+@keyframes gradient-flow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-gradient-flow {
+  animation: gradient-flow 6s ease infinite;
+}
