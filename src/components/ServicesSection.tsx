@@ -177,6 +177,25 @@ function ServiceCard({ service, index, onClick, isFocused }: ServiceCardProps) {
 export function ServicesSection() {
   const [selectedService, setSelectedService] = useState<string | null>(null);
   const navigate = useNavigate();
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const handleSectionMouseMove = (e: React.MouseEvent) => {
+    if (!sectionRef.current) return;
+    const rect = sectionRef.current.getBoundingClientRect();
+    const xPct = (e.clientX - rect.left) / rect.width - 0.5;
+    const yPct = (e.clientY - rect.top) / rect.height - 0.5;
+    mouseX.set(xPct);
+    mouseY.set(yPct);
+  };
+
+  // Smooth springs for background parallax
+  const bgRotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], ["3deg", "-3deg"]), { stiffness: 40, damping: 30 });
+  const bgRotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], ["-4deg", "4deg"]), { stiffness: 40, damping: 30 });
+  const bgTranslateX = useSpring(useTransform(mouseX, [-0.5, 0.5], ["-2%", "2%"]), { stiffness: 40, damping: 30 });
+  const bgTranslateY = useSpring(useTransform(mouseY, [-0.5, 0.5], ["-2%", "2%"]), { stiffness: 40, damping: 30 });
 
   const filteredServices = selectedService 
     ? services.filter(s => s.title === selectedService)
@@ -191,20 +210,47 @@ export function ServicesSection() {
   };
 
   return (
-    <section id="servicos" className="section-padding bg-[#020617] relative overflow-hidden min-h-[800px]">
-      <div className="absolute inset-0 z-0">
-        <img
+    <section 
+      id="servicos" 
+      ref={sectionRef}
+      onMouseMove={handleSectionMouseMove}
+      className="section-padding bg-[#020617] relative min-h-[800px] overflow-hidden"
+      style={{ perspective: 1500 }}
+    >
+      <motion.div 
+        className="absolute inset-0 z-0 pointer-events-none origin-center"
+        style={{
+          rotateX: bgRotateX,
+          rotateY: bgRotateY,
+          x: bgTranslateX,
+          y: bgTranslateY,
+          scale: 1.15, // Overscale to hide edges when tilting
+          transformStyle: "preserve-3d",
+        }}
+      >
+        {/* Layer 1: the physical image floating at a certain distance */}
+        <motion.img
           src={donoImage}
           alt="Equipe F. Soluções"
-          className="w-full h-full object-cover object-top opacity-50"
+          style={{ transform: "translateZ(-100px)" }}
+          className="absolute inset-0 w-full h-full object-cover object-top opacity-50"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#020617] via-[#020617]/70 to-[#020617]/40" />
-      </div>
+        {/* Layer 2: a dark grid overlay to give structural depth */}
+        <motion.div 
+          style={{ transform: "translateZ(50px)" }}
+          className="absolute inset-0 opacity-[0.05] pointer-events-none"
+        >
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:48px_48px]" />
+        </motion.div>
+      </motion.div>
+
+      {/* Layer 3: Vignette & darken gradient overlay so text remains readable, pinned to the main viewport not 3D rotated */}
+      <div className="absolute inset-0 bg-gradient-to-t from-[#020617] via-[#020617]/70 to-[#020617]/40 pointer-events-none z-0" />
 
       <div className="container mx-auto relative z-10">
         <ScrollAnimation variant="fadeUp">
           <div className="text-center mb-20">
-            <h2 className="font-heading text-4xl md:text-6xl font-black text-white uppercase tracking-tighter leading-none mb-6">
+            <h2 className="font-heading text-4xl md:text-6xl font-black text-white uppercase tracking-tighter leading-none mb-6 drop-shadow-2xl">
               {selectedService ? "Solução em" : "Nossas"} <span className="text-primary italic">{selectedService || "Soluções"}</span>
             </h2>
             
@@ -213,7 +259,7 @@ export function ServicesSection() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 onClick={() => setSelectedService(null)}
-                className="flex items-center gap-2 mx-auto text-primary/60 hover:text-primary transition-colors font-heading font-black uppercase tracking-widest text-xs"
+                className="flex items-center gap-2 mx-auto text-primary/60 hover:text-primary transition-colors font-heading font-black uppercase tracking-widest text-xs drop-shadow-xl"
               >
                 <ArrowLeft size={16} />
                 Voltar para todas as soluções
