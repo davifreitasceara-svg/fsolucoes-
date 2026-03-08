@@ -4,9 +4,9 @@ import { ShoppingCart, Croissant, Store, Snowflake } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState } from "react";
 
-import project_supermarket from "@/assets/Instagram21_files/503302760_693422413682586_1668889886455766648_n.jpg";
-import project_bakery from "@/assets/Instagram video_files/485771840_18314872924202395_272744802950690594_n.jpg";
-import project_market from "@/assets/Instagram21_files/623993451_18109663492659054_3677613959478220949_n.jpg";
+import project_supermarket from "@/assets/project_supermarket.jpg";
+import project_bakery from "@/assets/project_bakery.jpg";
+import project_market from "@/assets/project_market.jpg";
 
 const segments = [
   { 
