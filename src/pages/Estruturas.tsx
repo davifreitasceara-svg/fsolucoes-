@@ -73,8 +73,8 @@ export default function Estruturas() {
               <LayoutGrid className="text-primary" size={40} />
             </div>
             <div>
-              <span className="text-xs font-heading font-black text-primary uppercase tracking-[0.3em] block mb-1">STR-202 · Load_Optimal</span>
-              <h1 className="font-heading text-5xl md:text-7xl font-black text-white uppercase tracking-tighter">
+
+              <h1 className="font-heading text-4xl sm:text-5xl md:text-7xl font-black text-white uppercase tracking-tighter break-words break-all sm:break-normal">
                 Estru<span className="text-primary italic">turas</span>
               </h1>
             </div>

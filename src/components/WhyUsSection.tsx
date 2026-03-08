@@ -77,9 +77,7 @@ export function WhyUsSection() {
 
                   {/* Tech Header */}
                   <div className="flex justify-between items-start mb-10 relative z-10">
-                    <div className="flex flex-col">
-                      <span className="text-[9px] font-heading font-black text-primary uppercase tracking-widest">{r.ref}</span>
-                    </div>
+
                     <r.icon className="text-primary opacity-30 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500" size={20} />
                   </div>
                   

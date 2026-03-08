@@ -120,13 +120,7 @@ function ServiceCard({ service, index, onClick, isFocused }: ServiceCardProps) {
           style={{ transform: "translateZ(30px)" }}
           className="flex justify-between items-start mb-16 relative z-10"
         >
-          <div className="flex flex-col">
-            <span className="text-[10px] font-heading font-black text-primary uppercase tracking-[0.3em]">{service.ref}</span>
-            <div className="flex items-center gap-1.5 mt-2">
-              <div className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse shadow-[0_0_8px_rgba(56,189,248,0.8)]" />
-              <span className="text-[10px] font-heading font-bold text-white/40 uppercase tracking-widest">{service.status}</span>
-            </div>
-          </div>
+
           <service.icon className={`text-primary ${isFocused ? "opacity-100 scale-125" : "opacity-40 group-hover:opacity-100"} transition-all duration-500`} size={isFocused ? 40 : 28} />
         </div>
 
@@ -134,7 +128,7 @@ function ServiceCard({ service, index, onClick, isFocused }: ServiceCardProps) {
           style={{ transform: "translateZ(50px)" }}
           className="relative z-10"
         >
-          <h3 className={`${isFocused ? "text-3xl sm:text-4xl" : "text-xl sm:text-2xl"} font-heading font-black text-white uppercase tracking-tight mb-6 group-hover:text-primary transition-colors duration-300 break-words`}>
+          <h3 className={`${isFocused ? "text-2xl sm:text-4xl" : "text-lg sm:text-2xl"} font-heading font-black text-white uppercase tracking-tight mb-6 group-hover:text-primary transition-colors duration-300 break-words hyphens-auto`}>
             {service.title}
           </h3>
           <div className={`h-[2px] ${isFocused ? "w-24" : "w-12"} bg-primary/30 group-hover:w-32 group-hover:bg-primary transition-all duration-700 mb-8`} />
@@ -266,7 +260,7 @@ export function ServicesSection() {
       <div className="container mx-auto relative z-10 pt-10">
         <ScrollAnimation variant="fadeUp">
           <div className="text-center mb-20">
-            <h2 className="font-heading text-3xl sm:text-4xl md:text-6xl font-black text-white uppercase tracking-tighter leading-none mb-6 drop-shadow-2xl break-words">
+            <h2 className="font-heading text-2xl sm:text-4xl md:text-6xl font-black text-white uppercase tracking-tighter leading-none mb-6 drop-shadow-2xl break-words hyphens-auto">
               {selectedService ? "Solução em" : "Nossas"} <span className="text-primary italic">{selectedService || "Soluções"}</span>
             </h2>
             

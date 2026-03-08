@@ -69,7 +69,7 @@ export default function CamarasFrias() {
               <Snowflake className="text-primary" size={40} />
             </div>
             <div>
-              <span className="text-xs font-heading font-black text-primary uppercase tracking-[0.3em] block mb-1">REF-101 · Active_Cooling</span>
+
               <h1 className="font-heading text-5xl md:text-7xl font-black text-white uppercase tracking-tighter">
                 Câmaras <span className="text-primary italic">Frias</span>
               </h1>

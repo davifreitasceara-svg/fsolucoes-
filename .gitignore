@@ -32,3 +32,4 @@ dist-ssr
 *_files/
 fsolucoes_files/
 fsolucoes-modern-display-1/
+.vercel
