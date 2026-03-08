@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import heroVideo from "@/assets/fsolucoes-hero.mp4";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Snowflake, CheckCircle } from "lucide-react";
 import camaraFria1 from "@/assets/camara_fria_real_1.jpg";
@@ -31,11 +32,17 @@ export default function CamarasFrias() {
 
       {/* Hero */}
       <section className="relative pt-36 pb-24 overflow-hidden">
-        <div className="absolute inset-0 opacity-[0.12] pointer-events-none">
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:32px_32px]" />
-        </div>
-        {/* Glow */}
-        <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-primary/10 blur-[120px] rounded-full pointer-events-none" />
+        {/* Video background */}
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover opacity-30 pointer-events-none"
+          src={heroVideo}
+        />
+        {/* Dark overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#020617]/80 via-[#020617]/60 to-[#020617] pointer-events-none" />
 
         <div className="container mx-auto px-6 relative z-10">
           <motion.div
@@ -95,15 +102,6 @@ export default function CamarasFrias() {
       {/* Gallery */}
       <section className="py-20 bg-[#030b18]">
         <div className="container mx-auto px-6">
-          <motion.h2
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="font-heading text-3xl font-black text-white uppercase tracking-tighter mb-10"
-          >
-            Galeria de <span className="text-primary italic">Projetos</span>
-          </motion.h2>
-
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {photos.map((photo, i) => (
               <motion.div
