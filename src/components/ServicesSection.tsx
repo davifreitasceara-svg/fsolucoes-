@@ -196,9 +196,9 @@ export function ServicesSection() {
         <img
           src={donoImage}
           alt="Equipe F. Soluções"
-          className="w-full h-full object-cover object-top opacity-20"
+          className="w-full h-full object-cover object-top opacity-50"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#020617] via-[#020617]/80 to-[#020617]/40" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#020617] via-[#020617]/70 to-[#020617]/40" />
       </div>
 
       <div className="container mx-auto relative z-10">
