@@ -7,40 +7,30 @@ const reasons = [
   { 
     icon: Users, 
     title: "Equipe Especializada", 
-    ref: "HUMAN_RES-01",
-    status: "Verified_Cert",
     desc: "Profissionais certificados e experientes em refrigeração comercial.",
     color: "#38bdf8"
   },
   { 
     icon: Zap, 
     title: "Instalação Rápida", 
-    ref: "DEPLOY-02",
-    status: "Priority_High",
     desc: "Cumprimos prazos para que seu negócio funcione sem interrupções.",
     color: "#0ea5e9"
   },
   { 
     icon: Shield, 
     title: "Equipamentos de Qualidade", 
-    ref: "HARDWARE-03",
-    status: "Industrial_Grade",
     desc: "Trabalhamos com as melhores marcas e equipamentos do mercado.",
     color: "#0284c7"
   },
   { 
     icon: Briefcase, 
     title: "Experiência Comercial", 
-    ref: "LEGACY-04",
-    status: "12_Years_Active",
     desc: "Mais de 12 anos atendendo supermercados, padarias e restaurantes.",
     color: "#075985"
   },
   { 
     icon: HeadphonesIcon, 
     title: "Suporte Técnico", 
-    ref: "SUPPORT-05",
-    status: "Ready_24/7",
     desc: "Assistência confiável para manutenção preventiva e corretiva.",
     color: "#0369a1"
   },

@@ -8,8 +8,6 @@ const services = [
   {
     icon: Snowflake,
     title: "Câmaras Frias",
-    ref: "REF-101",
-    status: "Active_Cooling",
     desc: "Projetos e montagem de câmaras frigoríficas de alto desempenho.",
     color: "#38bdf8",
     href: "/camaras-frias",
@@ -17,8 +15,6 @@ const services = [
   {
     icon: LayoutGrid,
     title: "Estruturas",
-    ref: "STR-202",
-    status: "Load_Optimal",
     desc: "Equipamentos e gôndolas para máxima eficiência energética.",
     color: "#0ea5e9",
     href: "/estruturas",
@@ -26,8 +22,6 @@ const services = [
   {
     icon: Wrench,
     title: "Suporte Técnico",
-    ref: "MNT-303",
-    status: "System_Ready",
     desc: "Manutenção ágil para continuidade operacional absoluta.",
     color: "#0284c7",
     href: null,
@@ -35,8 +29,6 @@ const services = [
   {
     icon: Settings,
     title: "Projetos",
-    ref: "PRJ-404",
-    status: "Verified",
     desc: "Engenharia voltada para economia e performance industrial.",
     color: "#075985",
     href: null,
