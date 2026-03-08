@@ -21,7 +21,7 @@ const services = [
     status: "Load_Optimal",
     desc: "Equipamentos e gôndolas para máxima eficiência energética.",
     color: "#0ea5e9",
-    href: null,
+    href: "/estruturas",
   },
   {
     icon: Wrench,
