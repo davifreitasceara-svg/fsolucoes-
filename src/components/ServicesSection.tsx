@@ -134,7 +134,7 @@ function ServiceCard({ service, index, onClick, isFocused }: ServiceCardProps) {
           style={{ transform: "translateZ(50px)" }}
           className="relative z-10"
         >
-          <h3 className={`${isFocused ? "text-4xl" : "text-2xl"} font-heading font-black text-white uppercase tracking-tight mb-6 group-hover:text-primary transition-colors duration-300`}>
+          <h3 className={`${isFocused ? "text-3xl sm:text-4xl" : "text-xl sm:text-2xl"} font-heading font-black text-white uppercase tracking-tight mb-6 group-hover:text-primary transition-colors duration-300 break-words`}>
             {service.title}
           </h3>
           <div className={`h-[2px] ${isFocused ? "w-24" : "w-12"} bg-primary/30 group-hover:w-32 group-hover:bg-primary transition-all duration-700 mb-8`} />
@@ -266,7 +266,7 @@ export function ServicesSection() {
       <div className="container mx-auto relative z-10 pt-10">
         <ScrollAnimation variant="fadeUp">
           <div className="text-center mb-20">
-            <h2 className="font-heading text-4xl md:text-6xl font-black text-white uppercase tracking-tighter leading-none mb-6 drop-shadow-2xl">
+            <h2 className="font-heading text-3xl sm:text-4xl md:text-6xl font-black text-white uppercase tracking-tighter leading-none mb-6 drop-shadow-2xl break-words">
               {selectedService ? "Solução em" : "Nossas"} <span className="text-primary italic">{selectedService || "Soluções"}</span>
             </h2>
             

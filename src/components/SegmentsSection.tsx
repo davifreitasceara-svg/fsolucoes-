@@ -102,7 +102,7 @@ export function SegmentsSection() {
                     <div className="space-y-2">
                       <div className="flex items-center gap-2">
                         <div className="h-[2px] w-8 bg-primary translate-x-[-20px] opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-500" />
-                        <h3 className="font-heading text-xl md:text-2xl font-black text-white uppercase tracking-tight">
+                        <h3 className="font-heading text-xl md:text-2xl font-black text-white uppercase tracking-tight break-words">
                           {s.label}
                         </h3>
                       </div>
