@@ -1,7 +1,8 @@
 import { ScrollAnimation } from "@/components/ScrollAnimation";
-import { Snowflake, LayoutGrid, Wrench, Settings } from "lucide-react";
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { Snowflake, LayoutGrid, Wrench, Settings, ArrowLeft } from "lucide-react";
+import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from "framer-motion";
+import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const services = [
   {
@@ -11,6 +12,7 @@ const services = [
     status: "Active_Cooling",
     desc: "Projetos e montagem de câmaras frigoríficas de alto desempenho.",
     color: "#38bdf8",
+    href: "/camaras-frias",
   },
   {
     icon: LayoutGrid,
@@ -19,6 +21,7 @@ const services = [
     status: "Load_Optimal",
     desc: "Equipamentos e gôndolas para máxima eficiência energética.",
     color: "#0ea5e9",
+    href: null,
   },
   {
     icon: Wrench,
@@ -27,6 +30,7 @@ const services = [
     status: "System_Ready",
     desc: "Manutenção ágil para continuidade operacional absoluta.",
     color: "#0284c7",
+    href: null,
   },
   {
     icon: Settings,
@@ -35,15 +39,18 @@ const services = [
     status: "Verified",
     desc: "Engenharia voltada para economia e performance industrial.",
     color: "#075985",
+    href: null,
   },
 ];
 
 interface ServiceCardProps {
   service: typeof services[0];
   index: number;
+  onClick?: () => void;
+  isFocused?: boolean;
 }
 
-function ServiceCard({ service, index }: ServiceCardProps) {
+function ServiceCard({ service, index, onClick, isFocused }: ServiceCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -67,7 +74,6 @@ function ServiceCard({ service, index }: ServiceCardProps) {
     x.set(xPct);
     y.set(yPct);
 
-    // Update custom properties for CSS-based glare if needed
     cardRef.current?.style.setProperty("--mouse-x", `${mouseX}px`);
     cardRef.current?.style.setProperty("--mouse-y", `${mouseY}px`);
   };
@@ -84,74 +90,108 @@ function ServiceCard({ service, index }: ServiceCardProps) {
   );
 
   return (
-    <ScrollAnimation variant="fadeUp" delay={index * 0.1}>
+    <motion.div
+      layout
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.9 }}
+      transition={{ duration: 0.5, ease: "circOut" }}
+      className={`${isFocused ? "max-w-2xl mx-auto w-full" : "h-full"}`}
+    >
       <motion.div
         ref={cardRef}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
+        onClick={onClick}
         style={{
-          rotateY,
-          rotateX,
+          rotateY: isFocused ? 0 : rotateY,
+          rotateX: isFocused ? 0 : rotateX,
           transformStyle: "preserve-3d",
           perspective: 1000,
         }}
-        className="relative h-full bg-[#0a0f1d] rounded-2xl p-6 border border-white/5 overflow-hidden group transition-all duration-500 hover:border-primary/50 cursor-pointer"
+        className={`relative ${isFocused ? "min-h-[400px]" : "h-full"} bg-[#0a0f1d] rounded-2xl p-8 border border-white/5 overflow-hidden group transition-all duration-500 hover:border-primary/50 cursor-pointer shadow-2xl`}
       >
-        {/* Dynamic Glare */}
         <motion.div
           style={{ background: glareBg }}
           className="absolute inset-0 z-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
         />
 
-        {/* Technical Header (Parallax Layer 1) */}
         <div 
           style={{ transform: "translateZ(30px)" }}
-          className="flex justify-between items-start mb-12 relative z-10"
+          className="flex justify-between items-start mb-16 relative z-10"
         >
           <div className="flex flex-col">
-            <span className="text-[9px] font-heading font-black text-primary uppercase tracking-widest">{service.ref}</span>
-            <div className="flex items-center gap-1.5 mt-1">
-              <div className="w-1 h-1 bg-primary rounded-full animate-pulse" />
-              <span className="text-[8px] font-heading font-bold text-white/40 uppercase">{service.status}</span>
+            <span className="text-[10px] font-heading font-black text-primary uppercase tracking-[0.3em]">{service.ref}</span>
+            <div className="flex items-center gap-1.5 mt-2">
+              <div className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse shadow-[0_0_8px_rgba(56,189,248,0.8)]" />
+              <span className="text-[10px] font-heading font-bold text-white/40 uppercase tracking-widest">{service.status}</span>
             </div>
           </div>
-          <service.icon className="text-primary opacity-40 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500" size={24} />
+          <service.icon className={`text-primary ${isFocused ? "opacity-100 scale-125" : "opacity-40 group-hover:opacity-100"} transition-all duration-500`} size={isFocused ? 40 : 28} />
         </div>
 
-        {/* Body Content (Parallax Layer 2) */}
         <div 
           style={{ transform: "translateZ(50px)" }}
           className="relative z-10"
         >
-          <h3 className="font-heading text-xl font-black text-white uppercase tracking-tight mb-4 group-hover:text-primary transition-colors duration-300">
+          <h3 className={`${isFocused ? "text-4xl" : "text-2xl"} font-heading font-black text-white uppercase tracking-tight mb-6 group-hover:text-primary transition-colors duration-300`}>
             {service.title}
           </h3>
-          <div className="h-[2px] w-8 bg-white/10 group-hover:w-16 group-hover:bg-primary transition-all duration-500 mb-6" />
-          <p className="text-sm text-white/50 group-hover:text-white/80 transition-colors duration-500 leading-relaxed font-heading font-bold uppercase text-[11px] tracking-wider">
+          <div className={`h-[2px] ${isFocused ? "w-24" : "w-12"} bg-primary/30 group-hover:w-32 group-hover:bg-primary transition-all duration-700 mb-8`} />
+          <p className={`${isFocused ? "text-lg max-w-xl" : "text-xs"} text-white/50 group-hover:text-white/80 transition-colors duration-500 leading-relaxed font-heading font-bold uppercase tracking-[0.15em]`}>
             {service.desc}
           </p>
+          
+          {isFocused && (
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mt-12"
+            >
+              <a 
+                href={`https://wa.me/5585988543450?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20${service.title}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 bg-primary text-primary-foreground px-8 py-4 rounded-xl font-heading font-black uppercase tracking-widest text-sm hover:bg-primary-light transition-all shadow-button"
+              >
+                Solicitar Orçamento Especializado
+              </a>
+            </motion.div>
+          )}
         </div>
 
-        {/* Geometric Decoration */}
-        <div className="absolute bottom-0 right-0 w-16 h-16 pointer-events-none opacity-5 group-hover:opacity-10 transition-opacity duration-500">
+        <div className="absolute bottom-0 right-0 w-32 h-32 pointer-events-none opacity-5 group-hover:opacity-20 transition-opacity duration-700">
           <div className="absolute bottom-0 right-0 w-full h-[1px] bg-white" />
           <div className="absolute bottom-0 right-0 w-[1px] h-full bg-white" />
-          <div className="absolute bottom-2 right-2 w-4 h-4 border-r border-b border-white" />
+          <div className="absolute bottom-4 right-4 w-8 h-8 border-r border-b border-white" />
         </div>
 
-        {/* Hover Scan Effect */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-2xl">
-          <div className="absolute top-0 left-0 w-full h-[1px] bg-primary/20 -translate-y-full group-hover:translate-y-[400px] transition-transform duration-[2s] ease-in-out" />
+          <div className="absolute top-0 left-0 w-full h-[1px] bg-primary/20 -translate-y-full group-hover:translate-y-[600px] transition-transform duration-[3s] ease-in-out" />
         </div>
       </motion.div>
-    </ScrollAnimation>
+    </motion.div>
   );
 }
 
 export function ServicesSection() {
+  const [selectedService, setSelectedService] = useState<string | null>(null);
+  const navigate = useNavigate();
+
+  const filteredServices = selectedService 
+    ? services.filter(s => s.title === selectedService)
+    : services;
+
+  const handleCardClick = (s: typeof services[0]) => {
+    if (s.href) {
+      navigate(s.href);
+    } else if (!selectedService) {
+      setSelectedService(s.title);
+    }
+  };
+
   return (
-    <section id="servicos" className="section-padding bg-[#020617] relative overflow-hidden">
-      {/* Schematic Grid Background */}
+    <section id="servicos" className="section-padding bg-[#020617] relative overflow-hidden min-h-[800px]">
       <div className="absolute inset-0 opacity-[0.15] pointer-events-none">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:32px_32px]" />
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#334155_1px,transparent_1px),linear-gradient(to_bottom,#334155_1px,transparent_1px)] bg-[size:128px_128px]" />
@@ -160,17 +200,40 @@ export function ServicesSection() {
       <div className="container mx-auto relative z-10">
         <ScrollAnimation variant="fadeUp">
           <div className="text-center mb-20">
-            <h2 className="font-heading text-4xl md:text-6xl font-black text-white uppercase tracking-tighter leading-none">
-              Nossas <span className="text-primary italic">Soluções</span>
+            <h2 className="font-heading text-4xl md:text-6xl font-black text-white uppercase tracking-tighter leading-none mb-6">
+              {selectedService ? "Solução em" : "Nossas"} <span className="text-primary italic">{selectedService || "Soluções"}</span>
             </h2>
+            
+            {selectedService && (
+              <motion.button
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                onClick={() => setSelectedService(null)}
+                className="flex items-center gap-2 mx-auto text-primary/60 hover:text-primary transition-colors font-heading font-black uppercase tracking-widest text-xs"
+              >
+                <ArrowLeft size={16} />
+                Voltar para todas as soluções
+              </motion.button>
+            )}
           </div>
         </ScrollAnimation>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {services.map((s, i) => (
-            <ServiceCard key={s.title} service={s} index={i} />
-          ))}
-        </div>
+        <motion.div 
+          layout
+          className={`grid ${selectedService ? "grid-cols-1" : "md:grid-cols-2 lg:grid-cols-4"} gap-6`}
+        >
+          <AnimatePresence mode="popLayout">
+            {filteredServices.map((s, i) => (
+              <ServiceCard 
+                key={s.title} 
+                service={s} 
+                index={i} 
+                onClick={() => handleCardClick(s)}
+                isFocused={!!selectedService}
+              />
+            ))}
+          </AnimatePresence>
+        </motion.div>
       </div>
     </section>
   );
