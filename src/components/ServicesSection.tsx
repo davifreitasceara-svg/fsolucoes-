@@ -3,7 +3,7 @@ import { Snowflake, LayoutGrid, Wrench, Settings, ArrowLeft } from "lucide-react
 import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from "framer-motion";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import donoImage from "@/assets/fsolucoes_dono.jpg";
 const services = [
   {
     icon: Snowflake,
@@ -192,9 +192,13 @@ export function ServicesSection() {
 
   return (
     <section id="servicos" className="section-padding bg-[#020617] relative overflow-hidden min-h-[800px]">
-      <div className="absolute inset-0 opacity-[0.15] pointer-events-none">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:32px_32px]" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#334155_1px,transparent_1px),linear-gradient(to_bottom,#334155_1px,transparent_1px)] bg-[size:128px_128px]" />
+      <div className="absolute inset-0 z-0">
+        <img
+          src={donoImage}
+          alt="Equipe F. Soluções"
+          className="w-full h-full object-cover object-top opacity-20"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#020617] via-[#020617]/80 to-[#020617]/40" />
       </div>
 
       <div className="container mx-auto relative z-10">
