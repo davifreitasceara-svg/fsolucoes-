@@ -214,40 +214,56 @@ export function ServicesSection() {
       id="servicos" 
       ref={sectionRef}
       onMouseMove={handleSectionMouseMove}
-      className="section-padding bg-[#020617] relative min-h-[800px] overflow-hidden"
-      style={{ perspective: 1500 }}
+      className="section-padding bg-[#020617] relative min-h-[900px] overflow-hidden"
+      style={{ perspective: 1200 }}
     >
+      {/* Intense 3D Background Element */}
       <motion.div 
-        className="absolute inset-0 z-0 pointer-events-none origin-center"
+        className="absolute inset-x-0 top-0 h-[120%] z-0 pointer-events-none origin-center flex items-center justify-center opacity-60"
+        animate={{
+          y: [-20, 20, -20],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
         style={{
           rotateX: bgRotateX,
           rotateY: bgRotateY,
           x: bgTranslateX,
-          y: bgTranslateY,
-          scale: 1.15, // Overscale to hide edges when tilting
           transformStyle: "preserve-3d",
         }}
       >
-        {/* Layer 1: the physical image floating at a certain distance */}
-        <motion.img
-          src={donoImage}
-          alt="Equipe F. Soluções"
-          style={{ transform: "translateZ(-100px)" }}
-          className="absolute inset-0 w-full h-full object-cover object-top opacity-50"
-        />
-        {/* Layer 2: a dark grid overlay to give structural depth */}
         <motion.div 
-          style={{ transform: "translateZ(50px)" }}
-          className="absolute inset-0 opacity-[0.05] pointer-events-none"
+          animate={{ rotateZ: [-1, 1, -1] }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+          className="relative w-[110%] h-full"
+          style={{ transform: "translateZ(-200px) scale(1.1)" }}
         >
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:48px_48px]" />
+          {/* Main Photo with intense depth */}
+          <img
+            src={donoImage}
+            alt="Equipe F. Soluções"
+            className="absolute inset-0 w-full h-full object-cover object-top rounded-[100px] shadow-[0_0_100px_rgba(56,189,248,0.2)]"
+          />
+          {/* 3D Glass overlay floating above the photo */}
+          <div 
+            style={{ transform: "translateZ(150px)" }}
+            className="absolute inset-0 bg-gradient-to-tr from-primary/20 via-transparent to-transparent opacity-40 mix-blend-overlay" 
+          />
+          {/* Dynamic lighting layer floating even higher */}
+          <div 
+            style={{ transform: "translateZ(300px)" }}
+            className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.1)_0%,transparent_60%)]"
+          />
         </motion.div>
       </motion.div>
 
-      {/* Layer 3: Vignette & darken gradient overlay so text remains readable, pinned to the main viewport not 3D rotated */}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#020617] via-[#020617]/70 to-[#020617]/40 pointer-events-none z-0" />
+      {/* Vignette & darken gradient overlay so text remains readable */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#020617]/90 via-[#020617]/70 to-[#020617] pointer-events-none z-0" />
 
-      <div className="container mx-auto relative z-10">
+      <div className="container mx-auto relative z-10 pt-10">
         <ScrollAnimation variant="fadeUp">
           <div className="text-center mb-20">
             <h2 className="font-heading text-4xl md:text-6xl font-black text-white uppercase tracking-tighter leading-none mb-6 drop-shadow-2xl">
