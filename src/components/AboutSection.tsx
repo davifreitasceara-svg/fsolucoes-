@@ -1,112 +1,125 @@
 import { ScrollAnimation, useCounter } from "@/components/ScrollAnimation";
-import { TiltCard } from "@/components/TiltCard";
-import { Award, Clock, Zap, Headphones } from "lucide-react";
+import { Award, Clock, Zap, Headphones, CheckCircle2 } from "lucide-react";
 import { motion } from "framer-motion";
 
 const features = [
-  { icon: Award, label: "Qualidade", desc: "Excelência em cada projeto" },
-  { icon: Clock, label: "Experiência", desc: "+12 anos no mercado" },
-  { icon: Zap, label: "Eficiência", desc: "Prazos cumpridos" },
-  { icon: Headphones, label: "Suporte", desc: "Atendimento dedicado" },
+  { icon: Award, label: "Excelência Comprovada", desc: "Qualidade rigorosa em cada instalação, seguindo padrões da indústria." },
+  { icon: Clock, label: "+12 Anos de Mercado", desc: "Sólida experiência em refrigeração de alta capacidade." },
+  { icon: Zap, label: "Eficiência Energética", desc: "Projetos voltados para redução do consumo de energia." },
+  { icon: Headphones, label: "Suporte Integrado", desc: "Assistência e manutenção preventiva contínua." },
 ];
 
 const stats = [
-  { value: 500, suffix: "+", label: "Projetos Realizados" },
-  { value: 12, suffix: "+", label: "Anos de Experiência" },
-  { value: 300, suffix: "+", label: "Clientes Atendidos" },
-  { value: 50, suffix: "+", label: "Parceiros Comerciais" },
+  { value: 500, suffix: "+", label: "Projetos Entregues" },
+  { value: 12, suffix: "+", label: "Anos de Engenharia" },
+  { value: 300, suffix: "+", label: "Clientes Ativos" },
+  { value: 50, suffix: "+", label: "Parceiros" },
 ];
 
 function StatCounter({ value, suffix, label }: { value: number; suffix: string; label: string }) {
   const { count, ref } = useCounter(value);
   return (
-    <motion.div
-      ref={ref}
-      className="text-center"
-      whileHover={{ scale: 1.1, y: -5 }}
-      transition={{ type: "spring", stiffness: 300 }}
-    >
-      <span className="font-heading text-4xl md:text-5xl font-bold text-gradient">
-        {count}{suffix}
-      </span>
-      <p className="mt-2 text-sm text-muted-foreground font-body">{label}</p>
-    </motion.div>
+    <div ref={ref} className="text-left border-l-2 border-primary/30 pl-4 py-1">
+      <div className="flex items-baseline gap-1 mb-1">
+        <span className="font-heading text-3xl md:text-4xl font-black text-foreground tracking-tighter">
+          {count}
+        </span>
+        <span className="font-heading text-xl font-bold text-primary">{suffix}</span>
+      </div>
+      <p className="text-xs uppercase tracking-widest text-muted-foreground font-semibold">{label}</p>
+    </div>
   );
 }
 
 export function AboutSection() {
   return (
-    <section id="sobre" className="section-padding bg-background relative overflow-hidden">
-      {/* Decorative blurs */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full opacity-[0.03] bg-primary blur-3xl" />
-      
-      <div className="container mx-auto relative z-10">
-        <ScrollAnimation variant="fadeUp">
-          <div className="text-center mb-16">
-            <span className="text-primary font-heading text-sm font-bold tracking-widest uppercase">
-              Quem Somos
-            </span>
-            <h2 className="mt-3 font-heading text-3xl md:text-5xl font-bold text-foreground">
-              Sobre a <span className="text-gradient">F. Soluções</span>
-            </h2>
-          </div>
-        </ScrollAnimation>
+    <section id="sobre" className="section-padding bg-white relative">
+      <div className="container mx-auto">
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+          
+          <ScrollAnimation variant="fadeRight">
+            <div className="space-y-8">
+              <div>
+                <span className="section-tag">
+                  Quem Somos
+                </span>
+                <h2 className="heading-display text-4xl md:text-5xl lg:text-7xl text-[#0d1520] mb-6">
+                  ENGENHARIA QUE IMPULSIONA <br/>O SEU <span className="text-primary italic">NEGÓCIO</span>.
+                </h2>
+              </div>
+              
+              <div className="space-y-6 text-[#475569] leading-relaxed text-lg">
+                <p>
+                  A <strong className="text-[#0d1520]">F. Soluções Instalações Comerciais</strong> é
+                  especializada em projetos, instalação e manutenção de equipamentos de refrigeração
+                  comercial e industrial.
+                </p>
+                <p>
+                  Nossa missão é entregar sistemas confiáveis, utilizando as melhores práticas globais de engenharia para
+                  supermercados, redes de distribuição, açougues e restaurantes. Cada projeto é milimetricamente desenhado
+                  para o máximo de conservação e o mínimo de desperdício energético.
+                </p>
+                
+                <ul className="space-y-3 pt-4">
+                  {['Sistemas de refrigeração paralela e racks', 'Câmaras frias modulares sob medida', 'Expositores e ilhas refrigeradas de alta performance'].map((item) => (
+                    <li key={item} className="flex items-center gap-3 text-sm font-medium text-[#334155]">
+                      <CheckCircle2 size={18} className="text-primary" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <ScrollAnimation variant="fadeLeft">
-            <div className="space-y-5">
-              <p className="text-muted-foreground leading-relaxed text-lg">
-                A <strong className="text-foreground">F. Soluções Instalações Comerciais</strong> é
-                especializada em projetos, instalação e manutenção de equipamentos de refrigeração
-                comercial. Trabalhamos com foco em qualidade, eficiência e atendimento personalizado,
-                oferecendo soluções completas para empresas que precisam de sistemas de refrigeração
-                confiáveis e eficientes.
-              </p>
-              <p className="text-muted-foreground leading-relaxed text-lg">
-                Nossa equipe possui experiência na instalação de câmaras frigoríficas, balcões
-                refrigerados, vitrines expositivas e diversos equipamentos utilizados em
-                supermercados, padarias, açougues e restaurantes.
-              </p>
-              <p className="text-sm text-muted-foreground">
-                CNPJ: 16.880.401/0001-13 · Desde 2012 · Fortaleza – CE
-              </p>
+              <div className="pt-8 border-t border-gray-100 flex items-center justify-between">
+                <p className="text-xs text-muted-foreground font-semibold tracking-widest uppercase">
+                  CNPJ: 16.880.401/0001-13
+                </p>
+                <p className="text-xs text-muted-foreground font-semibold tracking-widest uppercase">
+                  Desde 2012 · Fortaleza – CE
+                </p>
+              </div>
             </div>
           </ScrollAnimation>
 
-          <ScrollAnimation variant="fadeRight">
-            <div className="grid grid-cols-2 gap-6">
+          <ScrollAnimation variant="fadeLeft" delay={0.2}>
+            <div className="grid sm:grid-cols-2 gap-4">
               {features.map((f, i) => (
-                <TiltCard key={f.label} className="group" tiltAmount={12}>
-                  <div className="bg-card rounded-xl p-6 shadow-card hover:shadow-card-hover transition-all duration-500 border border-border/50 relative overflow-hidden">
-                    {/* Glow effect */}
-                    <div className="absolute -top-10 -right-10 w-24 h-24 rounded-full opacity-0 group-hover:opacity-20 transition-opacity duration-500 bg-primary blur-2xl" />
-                    <motion.div
-                      className="w-14 h-14 rounded-xl gradient-primary flex items-center justify-center mb-4"
-                      whileHover={{ rotateY: 180, scale: 1.1 }}
-                      transition={{ duration: 0.5 }}
-                      style={{ transformStyle: "preserve-3d" }}
-                    >
-                      <f.icon className="text-primary-foreground" size={24} />
-                    </motion.div>
-                    <h3 className="font-heading font-bold text-foreground">{f.label}</h3>
-                    <p className="text-sm text-muted-foreground mt-1">{f.desc}</p>
-                  </div>
-                </TiltCard>
+                <div key={f.label} className="bg-[#f8fafc] border border-[#e2e8f0] p-8 transition-colors hover:border-primary/50 group">
+                  <f.icon className="text-primary mb-6 group-hover:scale-110 transition-transform" size={28} />
+                  <h3 className="font-heading font-black text-[15px] uppercase tracking-wide text-[#0d1520] mb-3">{f.label}</h3>
+                  <p className="text-[#64748b] text-sm leading-relaxed">{f.desc}</p>
+                </div>
               ))}
+            </div>
+            
+            <div className="mt-12 bg-[#050A0C] p-10 flex flex-col md:flex-row gap-10 md:items-center justify-between dark">
+              <div className="grid grid-cols-2 gap-8 w-full hidden dark">
+                  {/* Isso não vai renderizar direito sem ajustar os componentes de StatCounter para dark theme explicitly se ele herdar global light.
+                      Vamos forçar classes específicas. */}
+              </div>
+              <div className="grid grid-cols-2 gap-8 w-full">
+                {stats.map((s) => (
+                  <div key={s.label} className="text-left border-l-2 border-primary pl-4 py-1">
+                    <div className="flex items-baseline gap-1 mb-1">
+                      <span className="font-heading text-3xl md:text-4xl font-black text-white tracking-tighter">
+                         <AnimatedCount value={s.value} />
+                      </span>
+                      <span className="font-heading text-xl font-bold text-primary">{s.suffix}</span>
+                    </div>
+                    <p className="text-[10px] uppercase tracking-widest text-white/50 font-bold">{s.label}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           </ScrollAnimation>
         </div>
-
-        {/* Counters with glass effect */}
-        <ScrollAnimation variant="fadeUp" delay={0.2}>
-          <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 bg-card/80 backdrop-blur-sm rounded-2xl p-10 shadow-card border border-border/50 relative overflow-hidden">
-            <div className="absolute inset-0 opacity-[0.02] bg-gradient-to-br from-primary to-accent rounded-2xl" />
-            {stats.map((s) => (
-              <StatCounter key={s.label} {...s} />
-            ))}
-          </div>
-        </ScrollAnimation>
       </div>
     </section>
   );
+}
+
+// Temporary component for internal use
+function AnimatedCount({ value }: { value: number }) {
+  const { count, ref } = useCounter(value);
+  return <span ref={ref}>{count}</span>;
 }
