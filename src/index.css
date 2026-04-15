@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Barlow+Condensed:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Open+Sans:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,67 +6,43 @@
 
 @layer base {
   :root {
-    --background: 210 25% 98%;
-    --foreground: 215 40% 10%;
+    --background: 0 0% 100%;
+    --foreground: 215 28% 17%; /* text-[#1e293b] */
 
     --card: 0 0% 100%;
-    --card-foreground: 215 40% 10%;
+    --card-foreground: 215 28% 17%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 215 40% 10%;
+    --popover-foreground: 215 28% 17%;
 
-    --primary: 186 100% 28%;           /* Teal escuro #00818A */
+    /* Azul Corporativo estilo Eletrofrio (#005A8B) */
+    --primary: 201 100% 27%;
     --primary-foreground: 0 0% 100%;
 
-    --primary-light: 186 100% 38%;
-    --primary-dark: 186 100% 18%;
+    /* Azul mais escuro para fundos e hovers (#003b5f) */
+    --secondary: 203 100% 18%;
+    --secondary-foreground: 0 0% 100%;
 
-    --secondary: 215 20% 94%;
-    --secondary-foreground: 215 40% 10%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
 
-    --muted: 215 20% 96%;
-    --muted-foreground: 215 15% 48%;
+    /* Vermelho vibrante estilo Logo Eletrofrio (#E30613) */
+    --accent: 356 95% 45%;
+    --accent-foreground: 0 0% 100%;
 
-    --accent: 186 60% 92%;
-    --accent-foreground: 186 100% 18%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 201 100% 27%;
 
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
-
-    --border: 215 20% 88%;
-    --input: 215 20% 88%;
-    --ring: 186 100% 28%;
-
-    --radius: 0.5rem;
-
-    --gradient-primary: linear-gradient(135deg, hsl(186 100% 18%), hsl(186 100% 32%));
-    --gradient-dark: linear-gradient(135deg, hsl(215 50% 8%), hsl(215 40% 14%));
-    --gradient-hero-overlay: linear-gradient(to right, hsla(215, 60%, 5%, 0.95), hsla(186, 80%, 8%, 0.75));
-    --shadow-card: 0 2px 24px hsla(186, 100%, 28%, 0.08);
-    --shadow-card-hover: 0 8px 40px hsla(186, 100%, 28%, 0.18);
-    --shadow-button: 0 4px 20px hsla(186, 100%, 28%, 0.4);
+    --radius: 0.25rem; /* Menor arredondamento corporativo */
   }
 
+  /* Força light theme para todas as instâncias */
   .dark {
-    --background: 215 50% 5%;
-    --foreground: 210 20% 96%;
-    --card: 215 45% 8%;
-    --card-foreground: 210 20% 96%;
-    --popover: 215 45% 8%;
-    --popover-foreground: 210 20% 96%;
-    --primary: 186 80% 42%;
-    --primary-foreground: 215 50% 5%;
-    --secondary: 215 35% 14%;
-    --secondary-foreground: 210 20% 96%;
-    --muted: 215 35% 14%;
-    --muted-foreground: 215 20% 60%;
-    --accent: 186 60% 16%;
-    --accent-foreground: 186 80% 72%;
-    --destructive: 0 62% 30%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 215 35% 14%;
-    --input: 215 35% 14%;
-    --ring: 186 80% 42%;
+    --background: 0 0% 100%;
+    --foreground: 215 28% 17%;
+    --card: 0 0% 100%;
+    --border: 214 32% 91%;
   }
 }
 
@@ -74,22 +50,13 @@
   * {
     @apply border-border;
   }
-
-  html {
-    scroll-behavior: smooth;
-  }
-
   body {
-    @apply bg-background text-foreground antialiased;
-    font-family: 'Inter', sans-serif;
-    selection-color: white;
+    @apply bg-background text-foreground bg-[#ffffff];
+    font-family: 'Open Sans', sans-serif;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
-
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Barlow Condensed', 'Inter', sans-serif;
-  }
-}
 
 @layer components {
   .section-padding {

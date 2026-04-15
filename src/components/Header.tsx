@@ -1,15 +1,14 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ArrowRight } from "lucide-react";
+import { Menu, X, Phone, Mail } from "lucide-react";
 import logo from "@/assets/logo.png";
-import embracoLogo from "https://www.embraco.com/wp-content/themes/embraco/assets/images/logo.svg"; // Fallback ou um asset local se tivesse
-import { Magnetic } from "@/components/Magnetic";
+import eletrofrioLogo from "https://eletrofrio.com.br/wp-content/themes/eletrofrio/assets/images/logo-eletrofrio.svg";
 
 const navItems = [
-  { label: "Soluções", href: "#servicos" },
-  { label: "Indústrias", href: "#segmentos" },
-  { label: "Projetos", href: "#projetos" },
-  { label: "Autoridade", href: "#por-que-nos" },
+  { label: "Soluções e Produtos", href: "#servicos" },
+  { label: "Setores de Atuação", href: "#segmentos" },
+  { label: "Obras Realizadas", href: "#projetos" },
+  { label: "Institucional", href: "#por-que-nos" },
 ];
 
 export function Header() {
@@ -24,70 +23,70 @@ export function Header() {
 
   return (
     <>
-      {/* Top Bar - Very Professional touch like Embraco */}
-      <div className="hidden md:flex bg-[#050A0C] text-white/70 py-1.5 px-6 justify-between items-center text-[10px] uppercase font-bold tracking-[0.2em] z-50 relative border-b border-white/5">
-        <div className="flex gap-6">
-          <a href="#contato" className="hover:text-primary transition-colors">Contate o Suporte</a>
-          <span className="text-white/20">|</span>
-          <a href="tel:558530673114" className="hover:text-primary transition-colors">Tel: (85) 3067-3114</a>
+      {/* Top Bar - Eletrofrio Blue */}
+      <div className="hidden md:flex bg-primary text-white py-2 px-6 justify-between items-center text-xs font-semibold z-50 relative">
+        <div className="flex gap-6 items-center">
+          <a href="mailto:contato@fsolucoes.com.br" className="flex items-center gap-2 hover:text-white/80 transition-colors">
+            <Mail size={14} /> contato@fsolucoes.com.br
+          </a>
+          <span className="text-white/40">|</span>
+          <a href="tel:558530673114" className="flex items-center gap-2 hover:text-white/80 transition-colors">
+            <Phone size={14} /> (85) 3067-3114
+          </a>
         </div>
-        <div className="flex items-center gap-3">
-          <span className="opacity-50">Parceiro Estratégico:</span>
-          {/* Mock Embraco partnership mention */}
-          <span className="text-white font-black tracking-widest">EMBRACO</span>
+        <div className="flex items-center gap-3 font-bold text-sm tracking-wide">
+          <span>PARCEIRO TÉCNICO AUTORIZADO</span>
         </div>
       </div>
 
       <header
-        className={`fixed w-full z-40 transition-all duration-500 ${
+        className={`fixed w-full z-40 transition-all duration-300 ${
           scrolled
-            ? "top-0 bg-[#0d1520]/95 backdrop-blur-xl border-b border-white/10 shadow-lg py-3"
-            : "top-0 md:top-[34px] bg-transparent py-6"
+            ? "top-0 bg-white shadow-md py-4"
+            : "top-0 md:top-[36px] bg-white border-b border-gray-100 py-6"
         }`}
       >
         <div className="container mx-auto flex items-center justify-between px-6">
-          <a href="#inicio" className="flex items-center gap-3 group">
+          <a href="#inicio" className="flex items-center gap-4 group">
+            {/* Logo agora sem ser "brightness-0 invert", no seu natural ou forçado pro azul/cor */}
             <img 
               src={logo} 
               alt="F. Soluções" 
-              className={`transition-all duration-500 ${scrolled ? 'h-10' : 'h-12'} brightness-0 invert opacity-90 group-hover:opacity-100`} 
+              className={`transition-all duration-300 ${scrolled ? 'h-10' : 'h-14'} object-contain`} 
             />
-            <div className={`flex flex-col border-l border-white/20 pl-3 transition-all duration-500 ${scrolled ? 'scale-90 opacity-100' : 'opacity-0 md:opacity-100'}`}>
-              <span className="text-white font-heading font-black text-sm uppercase tracking-widest leading-none">Soluções</span>
-              <span className="text-primary font-heading font-bold text-[10px] uppercase tracking-[0.3em] mt-1">Refrigeração</span>
+            <div className="hidden lg:flex flex-col border-l border-gray-300 pl-4 h-full py-1">
+              <span className="text-secondary font-heading font-black text-sm uppercase tracking-wide leading-none">Refrigeração</span>
+              <span className="text-gray-500 font-body font-bold text-[10px] uppercase tracking-widest mt-1">Comercial & Industrial</span>
             </div>
           </a>
 
           {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-10">
+          <nav className="hidden xl:flex items-center gap-8">
             {navItems.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
-                className="font-heading text-xs font-bold uppercase tracking-[0.15em] text-white/70 hover:text-white transition-colors relative group"
+                className="font-body text-sm font-bold text-secondary hover:text-accent transition-colors relative group"
               >
                 {item.label}
-                <span className="absolute -bottom-2 left-0 w-0 h-px bg-primary transition-all duration-300 group-hover:w-full" />
+                <span className="absolute -bottom-2 left-0 w-0 h-[2px] bg-accent transition-all duration-300 group-hover:w-full" />
               </a>
             ))}
             
-            <Magnetic strength={0.15}>
-              <a
-                href="https://wa.me/5585988543450"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-center gap-2 bg-primary hover:bg-primary-light text-white px-6 py-3 rounded-sm font-heading text-xs font-black uppercase tracking-widest transition-all duration-300 shadow-[0_0_15px_rgba(0,129,138,0.3)] hover:shadow-[0_0_25px_rgba(0,129,138,0.5)]"
-              >
-                Orçamento Técnico
-                <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-              </a>
-            </Magnetic>
+            <a
+              href="https://wa.me/5585988543450"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ml-4 bg-accent hover:bg-[#cc0000] text-white px-6 py-2.5 rounded shadow-sm font-heading text-sm font-bold tracking-wide transition-colors"
+            >
+              Fale com um Especialista
+            </a>
           </nav>
 
           {/* Mobile toggle */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden p-2 text-white/80 hover:text-white transition-colors"
+            className="xl:hidden p-2 text-secondary hover:text-accent transition-colors"
           >
             {mobileOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
@@ -97,31 +96,32 @@ export function Header() {
         <AnimatePresence>
           {mobileOpen && (
             <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              className="absolute top-full left-0 w-full bg-[#0d1520] border-b border-white/10 shadow-2xl md:hidden"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              className="absolute top-full left-0 w-full bg-white border-b border-gray-200 shadow-xl xl:hidden overflow-hidden"
             >
-              <nav className="flex flex-col py-6 px-6">
+              <nav className="flex flex-col">
                 {navItems.map((item) => (
                   <a
                     key={item.href}
                     href={item.href}
                     onClick={() => setMobileOpen(false)}
-                    className="font-heading text-sm font-bold uppercase tracking-widest text-white/80 hover:text-primary py-4 border-b border-white/5 transition-colors"
+                    className="font-body text-sm font-bold text-secondary hover:text-accent py-4 px-6 border-b border-gray-100 transition-colors"
                   >
                     {item.label}
                   </a>
                 ))}
-                <a
-                  href="https://wa.me/5585988543450"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-6 flex items-center justify-center gap-2 bg-primary text-white p-4 rounded-sm font-heading text-sm font-black uppercase tracking-widest text-center"
-                >
-                  Orçamento Técnico
-                  <ArrowRight size={16} />
-                </a>
+                <div className="p-6">
+                  <a
+                    href="https://wa.me/5585988543450"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex justify-center bg-accent text-white py-3 rounded font-heading text-sm font-bold"
+                  >
+                    Fale com um Especialista
+                  </a>
+                </div>
               </nav>
             </motion.div>
           )}

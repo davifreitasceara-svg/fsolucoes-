@@ -1,149 +1,118 @@
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { ChevronDown, ShieldCheck, ThermometerSnowflake, Settings2 } from "lucide-react";
-import heroBg from "@/assets/camara_fria_real_1.jpg"; // Usando foto real do projeto como fundo
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { ChevronRight } from "lucide-react";
+import heroBg from "@/assets/camara_fria_real_1.jpg";
+import heroBg2 from "@/assets/estrutura_real_1.jpg";
+
+const slides = [
+  { bg: heroBg, title: "LÍDERES EM", subtitle: "REFRIGERAÇÃO COMERCIAL" },
+  { bg: heroBg2, title: "EFICIÊNCIA", subtitle: "ENERGÉTICA E PERFORMANCE" }
+];
 
 export function HeroSection() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollY } = useScroll();
-  
-  // Efeito parallax mais sutil
-  const y = useTransform(scrollY, [0, 1000], [0, 300]);
-  const opacity = useTransform(scrollY, [0, 500], [1, 0]);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 6000);
+    return () => clearInterval(timer);
+  }, []);
 
   return (
-    <section
-      id="inicio"
-      className="relative min-h-[100vh] flex items-center justify-center overflow-hidden bg-[#050A0C]"
-      ref={containerRef}
-    >
-      {/* Background Parallax */}
-      <motion.div 
-        className="absolute inset-0 z-0"
-        style={{ y }}
-      >
-        <div
-          className="absolute inset-0 bg-cover bg-center object-cover scale-105"
-          style={{ backgroundImage: `url(${heroBg})` }}
-        />
-        {/* Overlays corporativos escuros (teal escuro) */}
-        <div className="absolute inset-0 bg-[#001015]/80 mix-blend-multiply z-0" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#001015] via-[#001015]/90 to-transparent z-0" />
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-[0.03] z-0 mix-blend-overlay" />
-      </motion.div>
-
-      {/* Grid Pattern sutil */}
-      <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.03]">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)] bg-[size:64px_64px]" />
-      </div>
+    <section id="inicio" className="relative min-h-[90vh] md:min-h-screen flex items-center pt-24 overflow-hidden bg-gray-100">
+      
+      {/* Background Slider */}
+      {slides.map((slide, index) => (
+        <div 
+          key={index}
+          className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === currentSlide ? 'opacity-100' : 'opacity-0 z-0'}`}
+        >
+          <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: `url(${slide.bg})` }}
+          />
+          {/* Eletrofrio Style overlay: gradient azul por cima da imagem */}
+          <div className="absolute inset-0 bg-gradient-to-r from-secondary/90 via-secondary/70 to-transparent" />
+        </div>
+      ))}
 
       {/* Content */}
-      <div className="relative z-10 w-full container mx-auto px-6 pt-32 pb-20 flex flex-col md:flex-row items-center justify-between">
-        
-        {/* Left Side - Copy */}
-        <motion.div 
-          className="flex-1 max-w-3xl"
-          style={{ opacity }}
-        >
+      <div className="relative z-10 container mx-auto px-6 h-full py-20 flex flex-col justify-center">
+        <div className="max-w-2xl text-white">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="flex items-center gap-3 mb-8"
+            key={`tag-${currentSlide}`}
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            className="flex items-center gap-3 mb-6"
           >
-            <div className="h-px w-12 bg-primary"></div>
-            <span className="text-primary font-heading font-bold text-xs uppercase tracking-[0.3em]">
-              Excelência em Instalações Comerciais
+            <div className="h-0.5 w-10 bg-accent"></div>
+            <span className="font-body font-bold text-sm tracking-widest text-[#e2e8f0] uppercase">
+              F. Soluções Instalações Comerciais
             </span>
           </motion.div>
 
           <motion.h1 
-            initial={{ opacity: 0, y: 40 }}
+            key={`title-${currentSlide}`}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="heading-display text-5xl md:text-7xl lg:text-8xl text-white mb-6"
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="font-heading font-black text-5xl md:text-7xl lg:text-8xl leading-[1.1] mb-8 uppercase"
           >
-            TECNOLOGIA EM
-            <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
-              REFRIGERAÇÃO
+            {slides[currentSlide].title} <br className="hidden md:block"/>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-[#ff4d4d]">
+              {slides[currentSlide].subtitle}
             </span>
           </motion.h1>
 
           <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+            key={`desc-${currentSlide}`}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-lg md:text-xl text-white/60 max-w-2xl font-body leading-relaxed mb-10"
+            className="text-lg md:text-xl font-body text-gray-200 mb-10 max-w-xl leading-relaxed"
           >
-            Sistemas completos de câmaras frigoríficas, expositores e engenharia de refrigeração para supermercados e a indústria de alimentos.
+            Sistemas frigoríficos e vitrines refrigeradas com a tecnologia que o seu supermercado ou indústria exigem.
           </motion.p>
 
           <motion.div
+            key={`btn-${currentSlide}`}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-col sm:flex-row gap-5"
+            className="flex gap-4"
           >
             <a 
-              href="https://wa.me/5585988543450" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="bg-primary hover:bg-primary-light text-white px-8 py-4 flex items-center justify-center gap-3 font-heading font-bold uppercase tracking-[0.15em] text-sm transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,129,138,0.4)]"
+              href="#servicos" 
+              className="bg-accent hover:bg-[#cc0000] text-white px-8 py-4 rounded font-heading font-bold uppercase tracking-wide transition-colors flex items-center gap-2"
             >
-              Falar com Engenharia
-              <Settings2 size={16} />
-            </a>
-            <a 
-              href="#projetos"
-              className="px-8 py-4 flex items-center justify-center gap-3 font-heading font-bold uppercase tracking-[0.15em] text-sm text-white/80 border border-white/20 hover:bg-white/5 hover:text-white transition-all duration-300"
-            >
-              Conhecer Projetos
+              Conheça os Produtos
+              <ChevronRight size={18} />
             </a>
           </motion.div>
-        </motion.div>
-
-        {/* Right Side - Info Panel (Módulo corporativo) */}
-        <motion.div
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
-          className="hidden lg:flex flex-col gap-4 w-72 mt-20 lg:mt-0"
-        >
-          {/* Card Indicador 1 */}
-          <div className="bg-[#0A1218]/80 backdrop-blur-md border border-white/10 p-5 shrink-0 flex items-start gap-4">
-            <ThermometerSnowflake className="text-primary mt-1" size={24} />
-            <div>
-              <p className="text-primary font-heading font-black text-[10px] uppercase tracking-widest mb-1">Controle Preciso</p>
-              <p className="text-white/70 text-xs leading-relaxed">Alta eficiência energética para grandes volumes.</p>
-            </div>
-          </div>
-          
-          {/* Card Indicador 2 */}
-          <div className="bg-[#0A1218]/80 backdrop-blur-md border border-white/10 p-5 shrink-0 flex items-start gap-4">
-            <ShieldCheck className="text-primary mt-1" size={24} />
-            <div>
-              <p className="text-primary font-heading font-black text-[10px] uppercase tracking-widest mb-1">Garantia Ativa</p>
-              <p className="text-white/70 text-xs leading-relaxed">Suporte técnico especializado 24/7 para sua indústria.</p>
-            </div>
-          </div>
-        </motion.div>
+        </div>
       </div>
 
-      {/* Scroll indicator Bottom */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
-        className="absolute bottom-6 left-6 md:left-12 flex items-center gap-4 z-10"
-      >
-        <div className="w-[1px] h-12 bg-white/20 relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-1/3 bg-primary animate-scan" />
-        </div>
-        <span className="text-white/40 text-[10px] font-heading font-bold uppercase tracking-[0.4em] rotate-180" style={{ writingMode: 'vertical-rl' }}>
-          Scroll
-        </span>
-      </motion.div>
+      {/* Slider Controls corporativos */}
+      <div className="absolute bottom-10 left-6 md:left-auto md:right-10 flex gap-2 z-20">
+        {slides.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setCurrentSlide(i)}
+            className={`h-2 transition-all duration-300 ${i === currentSlide ? 'w-8 bg-accent' : 'w-2 bg-white/50 hover:bg-white'}`}
+          />
+        ))}
+      </div>
+
+      {/* Onda inferior branca para separar a seção hero como no site corporativo */}
+      <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-10 transform translate-y-[2px]">
+        <svg fill="#ffffff" viewBox="0 0 1200 120" preserveAspectRatio="none" className="block w-full h-[40px] md:h-[80px]">
+          <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25"></path>
+          <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5"></path>
+          <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z"></path>
+        </svg>
+      </div>
     </section>
   );
 }

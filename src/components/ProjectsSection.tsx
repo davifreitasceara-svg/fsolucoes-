@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ScrollAnimation } from "@/components/ScrollAnimation";
 import { AnimatePresence, motion } from "framer-motion";
-import { X, ArrowUpRight } from "lucide-react";
+import { X, Search } from "lucide-react";
 import project1 from "@/assets/camara_fria_real_5.jpg";
 import project2 from "@/assets/camara_fria_real_2.jpg";
 import project3 from "@/assets/estrutura_real_3.jpg";
@@ -10,83 +10,78 @@ import project5 from "@/assets/estrutura_real_5.jpg";
 import project6 from "@/assets/camara_fria_real_6.jpg";
 
 const projects = [
-  { img: project1, title: "Câmara de Congelados", cat: "Centro de Distribuição" },
-  { img: project2, title: "Câmara Fria Modular", cat: "Açougue" },
-  { img: project3, title: "Expositores Verticais", cat: "Supermercado" },
-  { img: project4, title: "Cozinha Industrial", cat: "Restaurante" },
-  { img: project5, title: "Walk-in Cooler", cat: "Loja de Conveniência" },
-  { img: project6, title: "Sistema Central", cat: "Atacadista" },
+  { img: project1, title: "Câmara de Congelados Estocagem", cat: "Centro de Distribuição" },
+  { img: project2, title: "Sistema Modular", cat: "Açougue" },
+  { img: project3, title: "Mobiliário Expositor", cat: "Supermercado" },
+  { img: project4, title: "Painéis e Tubulação", cat: "Indústria de Alimentos" },
+  { img: project5, title: "Walk-in Cooler", cat: "Conveniência" },
+  { img: project6, title: "Central Termoelétrica", cat: "Varejo" },
 ];
 
 export function ProjectsSection() {
   const [lightbox, setLightbox] = useState<number | null>(null);
 
   return (
-    <section id="projetos" className="section-padding bg-[#f8fafc] relative">
-      <div className="container mx-auto">
+    <section id="projetos" className="section-padding bg-gray-50 relative border-t border-gray-200">
+      <div className="container mx-auto px-6">
         <ScrollAnimation variant="fadeUp">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-16 border-b border-gray-200 pb-6">
             <div>
-              <span className="section-tag">Nossas Obras</span>
-              <h2 className="heading-display text-4xl md:text-6xl text-[#0d1520]">
-                PROJETOS <br/>
-                <span className="text-primary italic">EXECUTADOS</span>
+              <span className="font-heading font-black text-accent uppercase tracking-widest text-sm mb-2 block">
+                Portfólio de Engenharia
+              </span>
+              <h2 className="font-heading font-black text-secondary text-3xl md:text-5xl">
+                OBRAS <span className="text-primary">REALIZADAS</span>
               </h2>
             </div>
-            <a href="https://instagram.com/fsolucoes_instalacoes" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-primary font-heading font-black uppercase tracking-widest text-sm hover:text-[#0d1520] transition-colors pb-2">
-              Ver portfólio completo
-              <ArrowUpRight size={18} />
+            <a href="https://instagram.com/fsolucoes_instalacoes" target="_blank" rel="noopener noreferrer" className="btn-outline mt-6 md:mt-0">
+              Ver Galeria Completa
             </a>
           </div>
         </ScrollAnimation>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((p, i) => (
             <ScrollAnimation key={i} variant="fadeUp" delay={i * 0.1}>
-              <motion.div
-                className="group cursor-pointer"
+              <div 
+                className="group relative cursor-pointer overflow-hidden rounded bg-white shadow-sm border border-gray-100 hover:shadow-xl transition-all"
                 onClick={() => setLightbox(i)}
               >
-                <div className="relative overflow-hidden aspect-[4/3] bg-[#e2e8f0] mb-4">
-                  <motion.img
+                <div className="aspect-[4/3] overflow-hidden relative">
+                  <img
                     src={p.img}
                     alt={p.title}
-                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     loading="lazy"
                   />
-                  {/* Overlay sutil */}
-                  <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 mix-blend-multiply" />
-                  
-                  {/* Ícone de zoom */}
-                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-white flex items-center justify-center rounded-full opacity-0 scale-50 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300 shadow-lg">
-                    <ArrowUpRight className="text-primary" size={20} />
-                  </div>
-
-                  <div className="absolute top-3 right-3 bg-white px-3 py-1 text-[10px] font-heading font-black uppercase tracking-widest text-[#0d1520]">
-                    {p.cat}
+                  <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center scale-50 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-300">
+                      <Search className="text-primary" size={20} />
+                    </div>
                   </div>
                 </div>
-                
-                <div>
-                  <h3 className="font-heading font-black text-lg text-[#0d1520] uppercase tracking-tight mb-1 group-hover:text-primary transition-colors">
+                <div className="p-5">
+                  <span className="text-[10px] font-heading font-bold uppercase tracking-widest text-gray-400 block mb-1">
+                    {p.cat}
+                  </span>
+                  <h3 className="font-heading font-bold text-secondary text-base leading-snug group-hover:text-primary transition-colors">
                     {p.title}
                   </h3>
-                  <div className="w-10 h-0.5 bg-primary/30 group-hover:bg-primary transition-colors duration-300" />
                 </div>
-              </motion.div>
+              </div>
             </ScrollAnimation>
           ))}
         </div>
       </div>
 
-      {/* Lightbox */}
+      {/* Lightbox Corporal */}
       <AnimatePresence>
         {lightbox !== null && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] bg-[#0d1520]/95 backdrop-blur-md flex items-center justify-center p-4"
+            className="fixed inset-0 z-[100] bg-secondary/95 backdrop-blur-sm flex items-center justify-center p-4"
             onClick={() => setLightbox(null)}
           >
             <motion.div
@@ -94,26 +89,27 @@ export function ProjectsSection() {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 20 }}
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className="relative max-w-5xl w-full"
+              className="relative max-w-5xl w-full bg-white rounded shadow-2xl overflow-hidden"
               onClick={(e) => e.stopPropagation()}
             >
-              <button
-                onClick={() => setLightbox(null)}
-                className="absolute -top-12 right-0 text-white/50 hover:text-white transition-colors"
-              >
-                <X size={32} />
-              </button>
-              
-              <div className="bg-white p-2 shadow-2xl">
+              <div className="flex justify-between items-center p-4 border-b border-gray-100 bg-gray-50">
+                <div>
+                  <h3 className="font-heading font-black text-xl text-secondary">{projects[lightbox].title}</h3>
+                  <span className="text-xs text-gray-500 font-bold uppercase tracking-wide">{projects[lightbox].cat}</span>
+                </div>
+                <button
+                  onClick={() => setLightbox(null)}
+                  className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-accent hover:text-white transition-colors"
+                >
+                  <X size={20} />
+                </button>
+              </div>
+              <div className="p-4 bg-gray-100">
                 <img
                   src={projects[lightbox].img}
                   alt={projects[lightbox].title}
-                  className="w-full object-contain max-h-[75vh]"
+                  className="w-full object-contain max-h-[70vh]"
                 />
-                <div className="p-4 flex justify-between items-center bg-white border-t border-gray-100">
-                  <h3 className="font-heading font-black text-2xl uppercase tracking-tight text-[#0d1520]">{projects[lightbox].title}</h3>
-                  <span className="text-xs font-bold uppercase tracking-widest text-[#64748b] bg-gray-100 px-3 py-1">{projects[lightbox].cat}</span>
-                </div>
               </div>
             </motion.div>
           </motion.div>
