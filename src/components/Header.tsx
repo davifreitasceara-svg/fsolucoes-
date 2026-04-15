@@ -1,14 +1,13 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Phone, Mail } from "lucide-react";
+import { Menu, X, Building, Package, GraduationCap, Phone } from "lucide-react";
 import logo from "@/assets/logo.png";
-import eletrofrioLogo from "https://eletrofrio.com.br/wp-content/themes/eletrofrio/assets/images/logo-eletrofrio.svg";
 
 const navItems = [
-  { label: "Soluções e Produtos", href: "#servicos" },
-  { label: "Setores de Atuação", href: "#segmentos" },
-  { label: "Obras Realizadas", href: "#projetos" },
-  { label: "Institucional", href: "#por-que-nos" },
+  { label: "Institucional", href: "#sobre", icon: Building },
+  { label: "Produtos", href: "#servicos", icon: Package },
+  { label: "Atendimento", href: "#contato", icon: Phone },
+  { label: "Portfólio", href: "#projetos", icon: GraduationCap },
 ];
 
 export function Header() {
@@ -16,60 +15,41 @@ export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
+    const handleScroll = () => setScrolled(window.scrollY > 10);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <>
-      {/* Top Bar - Eletrofrio Blue */}
-      <div className="hidden md:flex bg-primary text-white py-2 px-6 justify-between items-center text-xs font-semibold z-50 relative">
-        <div className="flex gap-6 items-center">
-          <a href="mailto:contato@fsolucoes.com.br" className="flex items-center gap-2 hover:text-white/80 transition-colors">
-            <Mail size={14} /> contato@fsolucoes.com.br
-          </a>
-          <span className="text-white/40">|</span>
-          <a href="tel:558530673114" className="flex items-center gap-2 hover:text-white/80 transition-colors">
-            <Phone size={14} /> (85) 3067-3114
-          </a>
-        </div>
-        <div className="flex items-center gap-3 font-bold text-sm tracking-wide">
-          <span>PARCEIRO TÉCNICO AUTORIZADO</span>
-        </div>
-      </div>
-
-      <header
-        className={`fixed w-full z-40 transition-all duration-300 ${
-          scrolled
-            ? "top-0 bg-white shadow-md py-4"
-            : "top-0 md:top-[36px] bg-white border-b border-gray-100 py-6"
-        }`}
-      >
-        <div className="container mx-auto flex items-center justify-between px-6">
-          <a href="#inicio" className="flex items-center gap-4 group">
-            {/* Logo agora sem ser "brightness-0 invert", no seu natural ou forçado pro azul/cor */}
+    <header
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ease-in-out ${
+        scrolled
+          ? "bg-white/95 backdrop-blur-md shadow-lg rounded-b-[2rem] py-3"
+          : "bg-white py-5 shadow-sm rounded-b-[2rem]"
+      }`}
+    >
+      <div className="container mx-auto px-6">
+        <div className="flex items-center justify-between">
+          <a href="#inicio" className="flex items-center gap-2">
             <img 
               src={logo} 
               alt="F. Soluções" 
-              className={`transition-all duration-300 ${scrolled ? 'h-10' : 'h-14'} object-contain`} 
+              className={`transition-all duration-300 object-contain ${scrolled ? 'h-10' : 'h-14'}`} 
             />
-            <div className="hidden lg:flex flex-col border-l border-gray-300 pl-4 h-full py-1">
-              <span className="text-secondary font-heading font-black text-sm uppercase tracking-wide leading-none">Refrigeração</span>
-              <span className="text-gray-500 font-body font-bold text-[10px] uppercase tracking-widest mt-1">Comercial & Industrial</span>
-            </div>
           </a>
 
-          {/* Desktop nav */}
-          <nav className="hidden xl:flex items-center gap-8">
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:flex items-center gap-8">
             {navItems.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
-                className="font-body text-sm font-bold text-secondary hover:text-accent transition-colors relative group"
+                className="flex items-center gap-2 font-heading font-bold text-sm text-primary hover:text-accent transition-colors group"
               >
+                <div className="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-primary group-hover:bg-accent group-hover:text-white transition-all duration-300">
+                  <item.icon size={14} />
+                </div>
                 {item.label}
-                <span className="absolute -bottom-2 left-0 w-0 h-[2px] bg-accent transition-all duration-300 group-hover:w-full" />
               </a>
             ))}
             
@@ -77,56 +57,59 @@ export function Header() {
               href="https://wa.me/5585988543450"
               target="_blank"
               rel="noopener noreferrer"
-              className="ml-4 bg-accent hover:bg-[#cc0000] text-white px-6 py-2.5 rounded shadow-sm font-heading text-sm font-bold tracking-wide transition-colors"
+              className="ml-4 bg-accent hover:bg-[#008bc7] text-white px-6 py-3 rounded-full font-heading font-bold text-sm uppercase tracking-wide transition-all shadow-md hover:shadow-lg"
             >
-              Fale com um Especialista
+              Falar com Engenharia
             </a>
           </nav>
 
           {/* Mobile toggle */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="xl:hidden p-2 text-secondary hover:text-accent transition-colors"
+            className="lg:hidden p-3 bg-gray-50 text-primary rounded-full hover:bg-accent hover:text-white transition-colors"
           >
-            {mobileOpen ? <X size={28} /> : <Menu size={28} />}
+            {mobileOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
+      </div>
 
-        {/* Mobile menu */}
-        <AnimatePresence>
-          {mobileOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              className="absolute top-full left-0 w-full bg-white border-b border-gray-200 shadow-xl xl:hidden overflow-hidden"
-            >
-              <nav className="flex flex-col">
-                {navItems.map((item) => (
-                  <a
-                    key={item.href}
-                    href={item.href}
-                    onClick={() => setMobileOpen(false)}
-                    className="font-body text-sm font-bold text-secondary hover:text-accent py-4 px-6 border-b border-gray-100 transition-colors"
-                  >
-                    {item.label}
-                  </a>
-                ))}
-                <div className="p-6">
-                  <a
-                    href="https://wa.me/5585988543450"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex justify-center bg-accent text-white py-3 rounded font-heading text-sm font-bold"
-                  >
-                    Fale com um Especialista
-                  </a>
-                </div>
-              </nav>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </header>
-    </>
+      {/* Mobile menu */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20, scaleY: 0.9 }}
+            animate={{ opacity: 1, y: 0, scaleY: 1 }}
+            exit={{ opacity: 0, y: -20, scaleY: 0.9 }}
+            className="absolute top-full left-4 right-4 mt-2 bg-white rounded-3xl shadow-2xl lg:hidden overflow-hidden origin-top border border-gray-100"
+          >
+            <nav className="flex flex-col p-4">
+              {navItems.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setMobileOpen(false)}
+                  className="flex items-center gap-4 font-heading font-bold text-base text-primary hover:bg-gray-50 hover:text-accent py-4 px-4 rounded-xl transition-colors"
+                >
+                  <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-accent">
+                    <item.icon size={18} />
+                  </div>
+                  {item.label}
+                </a>
+              ))}
+              <div className="p-4 border-t border-gray-100 mt-2">
+                <a
+                  href="https://wa.me/5585988543450"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex justify-center items-center h-14 w-full bg-accent text-white rounded-xl font-heading text-sm font-bold shadow-md hover:bg-[#008bc7]"
+                >
+                  Falar com Engenharia
+                </a>
+              </div>
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </header>
   );
 }

@@ -1,78 +1,66 @@
 import { ScrollAnimation } from "@/components/ScrollAnimation";
-import { Users, Zap, Shield, Briefcase, HeadphonesIcon, Settings2 } from "lucide-react";
-
-const reasons = [
-  { 
-    icon: Users, 
-    title: "Equipe Capacitada", 
-    desc: "Profissionais técnicos treinados continuamente pelas principais fábricas do mercado (Embraco, Danfoss).",
-  },
-  { 
-    icon: Zap, 
-    title: "Operação Ágil", 
-    desc: "Processos padronizados que garantem cronogramas de implantação menores sem perda de qualidade.",
-  },
-  { 
-    icon: Shield, 
-    title: "Confiança", 
-    desc: "Garantia atestada e uso exclusivo de componentes certificados de alta performance e durabilidade.",
-  },
-  { 
-    icon: Briefcase, 
-    title: "Experiência", 
-    desc: "Extenso know-how técnico, com centenas de sistemas estabilizados no Ceará e regiões.",
-  },
-  { 
-    icon: HeadphonesIcon, 
-    title: "Contratos O&M", 
-    desc: "Serviço contínuo de operação, manutenção preditiva e corretiva com SLA rigoroso.",
-  },
-  {
-    icon: Settings2,
-    title: "Automação e Controle",
-    desc: "Uso de sistemas de controle lógico modernos para economia de energia garantida.",
-  }
-];
+import bgPattern from "@/assets/camara_fria_real_1.jpg";
+import { CheckCircle2 } from "lucide-react";
 
 export function WhyUsSection() {
   return (
-    <section id="por-que-nos" className="section-padding bg-primary relative overflow-hidden">
+    <section id="por-que-nos" className="section-padding bg-eletro-pattern relative overflow-hidden">
       
-      {/* Background corporativo da Eletrofrio com grid leve branco no fundo azul */}
-      <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)', backgroundSize: '64px 64px' }} />
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-secondary/80 pointer-events-none" />
+      {/* Decorative large circle (Eletrofrio aesthetic touch) */}
+      <div className="absolute -top-[20%] -right-[10%] w-[600px] h-[600px] rounded-full bg-accent/20 blur-3xl mix-blend-screen pointer-events-none" />
 
-      <div className="container mx-auto px-6 relative z-10">
-        <ScrollAnimation variant="fadeUp">
-          <div className="text-center mb-16">
-            <span className="font-heading font-bold text-white/70 uppercase tracking-[0.3em] text-sm mb-2 block">
-              Garantia de Qualidade
-            </span>
-            <h2 className="font-heading font-black text-white text-3xl md:text-5xl mb-6">
-              POR QUE ESCOLHER A F. SOLUÇÕES?
-            </h2>
-            <div className="w-16 h-1 bg-accent mx-auto"></div>
-          </div>
-        </ScrollAnimation>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          {reasons.map((r, i) => (
-            <ScrollAnimation key={r.title} variant="fadeUp" delay={i * 0.1}>
-              <div className="bg-white/10 backdrop-blur-sm border border-white/20 p-8 rounded-lg hover:bg-white transition-colors duration-500 group h-full flex flex-col">
-                <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center text-white mb-6 group-hover:bg-primary group-hover:text-white transition-colors duration-500">
-                  <r.icon size={22} className="group-hover:scale-110 transition-transform"/>
-                </div>
-                
-                <h3 className="font-heading text-lg font-bold text-white uppercase tracking-wide mb-3 group-hover:text-secondary transition-colors">
-                  {r.title}
-                </h3>
-                
-                <p className="text-white/80 text-sm leading-relaxed font-body group-hover:text-gray-600 transition-colors flex-1">
-                  {r.desc}
+      <div className="container mx-auto px-4 max-w-7xl relative z-10">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          
+          <ScrollAnimation variant="fadeRight">
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl h-[500px]">
+              <img 
+                src={bgPattern} 
+                alt="Instalações" 
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-primary/40 mix-blend-multiply" />
+              {/* Eletrofrio typical overlay box */}
+              <div className="absolute bottom-8 left-8 right-8 bg-white/95 backdrop-blur-md rounded-2xl p-6 shadow-lg">
+                <p className="font-heading font-black text-primary text-xl uppercase tracking-wide text-center">
+                  Mais de <span className="text-accent underline decoration-4 underline-offset-4">500 sistemas</span> operando.
                 </p>
               </div>
-            </ScrollAnimation>
-          ))}
+            </div>
+          </ScrollAnimation>
+
+          <ScrollAnimation variant="fadeLeft">
+            <div>
+              <h2 className="heading-display text-4xl md:text-5xl text-white uppercase mb-6">
+                EXCELÊNCIA EM CADA <span className="text-accent">DETALHE</span>
+              </h2>
+              <p className="font-body text-white/90 text-lg mb-10 leading-relaxed max-w-xl">
+                Nossa matriz técnica atua em toda as fases, desde a elaboração da planta frigorífica até o startup da máquina e assistência contratual.
+              </p>
+
+              <div className="grid sm:grid-cols-2 gap-6">
+                {[
+                  "Equipe Plenamente Certificada",
+                  "Garantia Exclusiva de Equipamento",
+                  "Softwares de Controle Paralelo",
+                  "Cronogramas Milimétricos"
+                ].map((item, i) => (
+                  <div key={i} className="flex items-start gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors">
+                    <CheckCircle2 size={24} className="text-accent shrink-0" />
+                    <span className="font-heading font-bold text-sm text-white uppercase tracking-wide mt-1">
+                      {item}
+                    </span>
+                  </div>
+                ))}
+              </div>
+              
+              <div className="mt-12">
+                <a href="#contato" className="btn-cyan inline-flex">
+                  Fale com a nossa equipe
+                </a>
+              </div>
+            </div>
+          </ScrollAnimation>
         </div>
       </div>
     </section>

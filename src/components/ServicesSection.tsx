@@ -1,82 +1,68 @@
 import { ScrollAnimation } from "@/components/ScrollAnimation";
-import { Snowflake, LayoutGrid, Wrench, Settings, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import imgCamara from "@/assets/camara_fria_real_2.jpg";
+import imgGondola from "@/assets/estrutura_real_3.jpg";
+import imgCentral from "@/assets/camara_fria_real_6.jpg";
 
-const services = [
+const products = [
   {
-    icon: Snowflake,
-    title: "Câmaras Frigoríficas",
-    desc: "Câmaras frias modulares sob medida para armazenamento em médias e baixas temperaturas com alta eficiência térmica.",
-    href: "/camaras-frias",
+    title: "Câmaras Frias",
+    desc: "Câmaras frigoríficas para conservação em baixas e médias temperaturas com alta resistência térmica.",
+    img: imgCamara,
+    link: "#"
   },
   {
-    icon: LayoutGrid,
-    title: "Mobiliário Refrigerado",
-    desc: "Expositores, ilhas e gôndolas de alta performance que valorizam o produto e economizam energia na loja.",
-    href: "/estruturas",
+    title: "Vitrines & Expositor",
+    desc: "A melhor apresentação para o seu produto, garantindo performance e isolamento nas lojas.",
+    img: imgGondola,
+    link: "#"
   },
   {
-    icon: Wrench,
-    title: "Instalação e Manutenção",
-    desc: "Equipe técnica própria especializada em startup ágil, manutenção corretiva e preventiva para operações críticas.",
-    href: null,
-  },
-  {
-    icon: Settings,
-    title: "Projetos Especiais",
-    desc: "Sistemas Rack (compressor paralelo), cálculo de carga térmica e plantas inteligentes integradas à sua planta.",
-    href: null,
-  },
+    title: "Centrais e Racks Água",
+    desc: "Confiabilidade para grandes centrais térmicas com painéis de automação avançados.",
+    img: imgCentral,
+    link: "#"
+  }
 ];
 
 export function ServicesSection() {
   return (
-    <section id="servicos" className="section-padding bg-[#f4f7f9] relative">
-      <div className="container mx-auto px-6">
+    <section id="servicos" className="section-padding bg-background">
+      <div className="container mx-auto px-4 max-w-7xl">
         <ScrollAnimation variant="fadeUp">
-          <div className="text-center max-w-3xl mx-auto mb-20">
-            <span className="font-heading font-black text-accent uppercase tracking-widest text-sm mb-2 block">
-              Nosso Portfólio
-            </span>
-            <h2 className="font-heading font-black text-secondary text-3xl md:text-5xl mb-6">
-              SOLUÇÕES COMPLETAS EM <span className="text-primary">REFRIGERAÇÃO</span>
+          <div className="text-center mb-16">
+            <h2 className="heading-display text-4xl md:text-5xl uppercase mb-6">
+              Principais <span className="text-accent">Produtos</span>
             </h2>
-            <div className="w-20 h-1 bg-accent mx-auto mb-6"></div>
-            <p className="text-gray-600 font-body text-lg">
-              Integramos os melhores equipamentos e tecnologias do mercado para garantir a integridade térmica dos seus produtos com o menor custo de operação.
+            <p className="font-body text-gray-600 text-lg max-w-2xl mx-auto">
+              Sistemas inteligentes construídos com rigor e tecnologia sob medida para o tamanho da sua necessidade.
             </p>
           </div>
         </ScrollAnimation>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {services.map((s, i) => (
-            <ScrollAnimation key={s.title} variant="fadeUp" delay={0.1 * i} className="h-full">
-              <div className="bg-white rounded-lg shadow-sm hover:shadow-2xl border border-gray-100 transition-all duration-300 group flex flex-col h-full overflow-hidden">
-                {/* Linha superior colorida */}
-                <div className="h-1 w-full bg-gray-200 group-hover:bg-primary transition-colors"></div>
-                
-                <div className="p-8 flex-1 flex flex-col items-center text-center">
-                  <div className="w-20 h-20 rounded-full bg-[#f4f7f9] flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-colors duration-500">
-                    <s.icon size={36} strokeWidth={1.5} />
-                  </div>
-                  
-                  <h3 className="font-heading text-xl font-bold text-secondary mb-4">
-                    {s.title}
+        <div className="grid md:grid-cols-3 gap-8">
+          {products.map((p, i) => (
+            <ScrollAnimation key={i} variant="fadeUp" delay={i * 0.1}>
+              <div className="card-eletro overflow-hidden group flex flex-col h-full cursor-pointer">
+                <div className="h-64 overflow-hidden relative">
+                  <img 
+                    src={p.img} 
+                    alt={p.title} 
+                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/20 transition-colors duration-300" />
+                </div>
+                <div className="p-8 flex flex-col flex-1">
+                  <h3 className="font-heading font-black text-2xl text-primary mb-4 uppercase tracking-wide">
+                    {p.title}
                   </h3>
-                  
-                  <p className="text-gray-600 font-body text-sm leading-relaxed mb-6 flex-1">
-                    {s.desc}
+                  <p className="font-body text-gray-600 mb-8 flex-1 leading-relaxed">
+                    {p.desc}
                   </p>
-                  
-                  {s.href ? (
-                    <a href={s.href} className="inline-flex items-center justify-center gap-2 text-primary font-heading font-bold uppercase text-xs hover:text-secondary hover:gap-3 transition-all mt-auto py-2 px-6 border border-primary rounded-full hover:bg-primary/5">
-                      Saber Mais
-                      <ArrowRight size={14} />
-                    </a>
-                  ) : (
-                    <a href="https://wa.me/5585988543450" className="inline-flex items-center justify-center gap-2 text-gray-400 font-heading font-bold uppercase text-xs hover:text-primary transition-all mt-auto py-2">
-                      Consultar Especialista
-                    </a>
-                  )}
+                  <a href={p.link} className="flex items-center gap-2 font-heading font-bold text-accent group-hover:text-primary transition-colors text-sm uppercase tracking-wide">
+                    Acessar Linha Completa
+                    <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                  </a>
                 </div>
               </div>
             </ScrollAnimation>

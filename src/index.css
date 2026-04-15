@@ -6,8 +6,8 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 215 28% 17%; /* text-[#1e293b] */
+    --background: 210 20% 98%; /* #f7f7f7 */
+    --foreground: 215 28% 17%;
 
     --card: 0 0% 100%;
     --card-foreground: 215 28% 17%;
@@ -15,31 +15,31 @@
     --popover: 0 0% 100%;
     --popover-foreground: 215 28% 17%;
 
-    /* Azul Corporativo estilo Eletrofrio (#005A8B) */
-    --primary: 201 100% 27%;
+    /* Azul Escuro da Eletrofrio (#004B87) */
+    --primary: 206 100% 26%;
     --primary-foreground: 0 0% 100%;
 
-    /* Azul mais escuro para fundos e hovers (#003b5f) */
-    --secondary: 203 100% 18%;
+    /* Azul Ciano Vibrante Mágico dos botões (#009FE3) */
+    --accent: 198 100% 45%;
+    --accent-foreground: 0 0% 100%;
+
+    /* Eletrofrio Medium Light Blue (#136AB5) */
+    --secondary: 207 81% 39%;
     --secondary-foreground: 0 0% 100%;
 
     --muted: 210 40% 96%;
     --muted-foreground: 215 16% 47%;
 
-    /* Vermelho vibrante estilo Logo Eletrofrio (#E30613) */
-    --accent: 356 95% 45%;
-    --accent-foreground: 0 0% 100%;
-
     --border: 214 32% 91%;
     --input: 214 32% 91%;
-    --ring: 201 100% 27%;
+    --ring: 198 100% 45%;
 
-    --radius: 0.25rem; /* Menor arredondamento corporativo */
+    /* A Base do Eletrofrio: Bordas enormes e gentis */
+    --radius: 1rem; /* 16px básico */
   }
 
-  /* Força light theme para todas as instâncias */
   .dark {
-    --background: 0 0% 100%;
+    --background: 210 20% 98%; /* Forçado no light sempre */
     --foreground: 215 28% 17%;
     --card: 0 0% 100%;
     --border: 214 32% 91%;
@@ -51,166 +51,47 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground bg-[#ffffff];
+    @apply bg-background text-foreground bg-[#f7f7f7];
     font-family: 'Open Sans', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
   h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+}
 
 @layer components {
+  /* Seções espaçosas e fundos marcantes */
   .section-padding {
-    @apply py-24 md:py-32 px-4 md:px-8;
+    @apply py-24 md:py-32;
   }
 
-  .section-padding-sm {
-    @apply py-16 md:py-20 px-4 md:px-8;
+  /* Cartões Eletrofrio Curve 32px (rounded-3xl) */
+  .card-eletro {
+    @apply bg-white rounded-3xl shadow-sm border border-gray-100 transition-all duration-300 hover:shadow-xl hover:translate-y-[-4px];
   }
 
-  .gradient-primary {
-    background: var(--gradient-primary);
+  .btn-cyan {
+    @apply bg-accent hover:bg-[#008bc7] text-white transition-colors duration-300 font-heading font-bold px-8 py-4 rounded-xl uppercase tracking-wide text-sm flex items-center justify-center gap-3;
   }
 
-  .gradient-dark {
-    background: var(--gradient-dark);
+  .btn-outline-cyan {
+    @apply border-2 border-accent text-accent hover:bg-accent hover:text-white transition-colors duration-300 font-heading font-bold px-8 py-4 rounded-xl uppercase tracking-wide text-sm flex items-center justify-center gap-3;
   }
 
-  .shadow-card {
-    box-shadow: var(--shadow-card);
-  }
-
-  .shadow-card-hover {
-    box-shadow: var(--shadow-card-hover);
-  }
-
-  .shadow-button {
-    box-shadow: var(--shadow-button);
-  }
-
-  .text-gradient {
-    @apply bg-clip-text text-transparent;
-    background-image: var(--gradient-primary);
-  }
-
-  .glass-card {
-    @apply bg-white/5 backdrop-blur-xl border border-white/10 shadow-2xl;
-  }
-
-  .glass-card-light {
-    @apply bg-white/80 backdrop-blur-xl border border-white/60 shadow-lg;
-  }
-
-  .teal-glow {
-    box-shadow: 0 0 20px hsla(186, 100%, 28%, 0.3), 0 0 40px hsla(186, 100%, 28%, 0.15);
-  }
-
-  .teal-shadow {
-    filter: drop-shadow(0 0 8px hsla(186, 100%, 28%, 0.5));
-  }
-
-  /* Professional divider */
-  .divider-line {
-    @apply h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent;
-  }
-
-  /* Tech label */
-  .tech-label {
-    @apply text-xs font-semibold tracking-[0.2em] uppercase;
-    font-family: 'Inter', sans-serif;
-  }
-
-  /* Section tag */
-  .section-tag {
-    @apply inline-flex items-center gap-2 text-primary text-xs font-semibold uppercase tracking-[0.25em] mb-4;
-  }
-
-  /* Heading display */
   .heading-display {
-    font-family: 'Barlow Condensed', sans-serif;
-    @apply font-black uppercase tracking-tight leading-[0.95];
+    font-family: 'Montserrat', sans-serif;
+    @apply font-black tracking-tight leading-[1.1] text-primary;
   }
 
-  /* Premium card */
-  .card-premium {
-    @apply bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300;
+  /* Padrão Eletrofrio em fundo azul profundo */
+  .bg-eletro-pattern {
+    background-color: hsl(206 100% 26%);
+    background-image: radial-gradient(circle at center, rgba(255 255 255 / 0.05) 1px, transparent 1px);
+    background-size: 24px 24px;
   }
-
-  /* Dark card */
-  .card-dark {
-    @apply bg-[#0d1520] rounded-2xl border border-white/[0.06] transition-all duration-300;
-  }
-}
-
-/* ============== ANIMATIONS ============== */
-@keyframes gradient-flow {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-@keyframes scan-line {
-  0% { transform: translateY(-100%); }
-  100% { transform: translateY(200vh); }
-}
-
-@keyframes float-slow {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-16px); }
-}
-
-@keyframes pulse-ring {
-  0% { transform: scale(0.8); opacity: 1; }
-  100% { transform: scale(2.4); opacity: 0; }
-}
-
-@keyframes slide-in-right {
-  from { transform: translateX(60px); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
-}
-
-@keyframes ticker {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-.animate-gradient-flow {
-  animation: gradient-flow 8s ease infinite;
-  background-size: 200% 200%;
-}
-
-.animate-scan {
-  animation: scan-line 4s linear infinite;
-}
-
-.animate-float-slow {
-  animation: float-slow 6s ease-in-out infinite;
-}
-
-.animate-pulse-ring {
-  animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
-}
-
-.animate-ticker {
-  animation: ticker 28s linear infinite;
-}
-
-/* ============== SCROLLBAR ============== */
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: hsl(215 50% 5%);
-}
-::-webkit-scrollbar-thumb {
-  background: hsl(186 80% 28%);
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: hsl(186 80% 38%);
-}
-
-/* ============== SELECTION ============== */
-::selection {
-  background: hsla(186, 100%, 28%, 0.3);
-  color: inherit;
 }
