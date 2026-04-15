@@ -1,47 +1,52 @@
 import { ScrollAnimation } from "@/components/ScrollAnimation";
-import { FloatingParticles } from "@/components/FloatingParticles";
-import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
-import { Magnetic } from "@/components/Magnetic";
-import ctaBg from "@/assets/cta-bg.jpg";
+import { ArrowRight, HardHat } from "lucide-react";
+import ctaBg from "@/assets/camara_fria_real_1.jpg"; // Using a real photo instead of abstract bg
 
 export function CTASection() {
   return (
-    <section className="relative py-24 md:py-32 overflow-hidden">
+    <section className="relative py-32 overflow-hidden bg-[#0A1218]">
+      {/* Background corporativo */}
       <div
-        className="absolute inset-0 bg-cover bg-center bg-fixed z-0"
+        className="absolute inset-0 bg-cover bg-center object-cover opacity-30"
         style={{ backgroundImage: `url(${ctaBg})` }}
       />
-      <div className="absolute inset-0 bg-black/50" />
-      <FloatingParticles />
+      <div className="absolute inset-0 bg-gradient-to-r from-[#050A0C] via-[#050A0C]/90 to-transparent" />
+      <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10 mix-blend-overlay" />
 
-      <div className="relative z-10 container mx-auto px-4 text-center">
-        <ScrollAnimation variant="fadeUp">
-          <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-black text-[hsla(207,100%,50%,1)] glow-text uppercase tracking-wide max-w-4xl mx-auto leading-tight" style={{ textShadow: "0 0 20px rgba(0, 102, 255, 0.5)"}}>
-            Transformamos ideias em instalações comerciais eficientes.
-          </h2>
-          <p className="mt-6 text-xl text-white font-heading font-black uppercase tracking-[0.2em] max-w-2xl mx-auto opacity-80 decoration-primary/50 underline-offset-8">
-            Entre em contato com nossa equipe e solicite um projeto para o seu negócio.
-          </p>
-          <div className="mt-12 flex flex-col sm:flex-row gap-6 justify-center">
-            <Magnetic strength={0.3}>
-              <motion.div whileHover={{ scale: 1.05, y: -3 }} whileTap={{ scale: 0.97 }}>
-                <Button variant="hero" size="lg" className="text-lg px-10 py-8 bg-primary hover:bg-primary-light text-primary-foreground shadow-[0_0_20px_hsla(195,100%,50%,0.6)] border border-accent/50" asChild>
-                  <a href="#contato">Solicitar Projeto</a>
-                </Button>
-              </motion.div>
-            </Magnetic>
-            <Magnetic strength={0.3}>
-              <motion.div whileHover={{ scale: 1.05, y: -3 }} whileTap={{ scale: 0.97 }}>
-                <Button variant="whatsapp" size="lg" className="text-base px-8 py-6" asChild>
-                  <a href="https://wa.me/5585988543450" target="_blank" rel="noopener noreferrer">
-                    WhatsApp
-                  </a>
-                </Button>
-              </motion.div>
-            </Magnetic>
+      <div className="relative z-10 container mx-auto px-6">
+        <ScrollAnimation variant="fadeRight">
+          <div className="max-w-3xl">
+            <div className="flex items-center gap-3 mb-6">
+              <HardHat className="text-primary" size={24} />
+              <span className="text-primary font-heading font-bold text-xs uppercase tracking-[0.3em]">
+                Pronto para expandir sua operação?
+              </span>
+            </div>
+            
+            <h2 className="heading-display text-4xl md:text-5xl lg:text-7xl text-white mb-6">
+              TRANSFORME SEU <br />
+              SISTEMA DE <span className="text-primary italic">FRIO</span>
+            </h2>
+            
+            <p className="text-xl text-white/60 font-body mb-10 max-w-xl">
+              Fale com nossos engenheiros e descubra como otimizar sua refrigeração comercial com menores custos e maior rentabilidade a longo prazo.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-5">
+              <a 
+                href="#contato"
+                className="bg-primary hover:bg-primary-light text-white px-8 py-4 flex items-center justify-center gap-3 font-heading font-black uppercase tracking-[0.15em] text-sm transition-all duration-300"
+              >
+                Solicitar Cotação
+                <ArrowRight size={16} />
+              </a>
+            </div>
           </div>
         </ScrollAnimation>
+      </div>
+
+      <div className="absolute bottom-0 right-0 p-8 hidden md:block opacity-10 pointer-events-none">
+        <div className="text-8xl font-heading font-black text-white mix-blend-overlay">INDUSTRIAL</div>
       </div>
     </section>
   );

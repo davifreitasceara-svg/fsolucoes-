@@ -1,186 +1,179 @@
 import { useState } from "react";
 import { ScrollAnimation } from "@/components/ScrollAnimation";
 import { Button } from "@/components/ui/button";
-import { Phone, Mail, MapPin, MessageCircle, Instagram } from "lucide-react";
-import { TiltCard } from "@/components/TiltCard";
+import { Phone, Mail, MapPin, ClipboardList, Instagram } from "lucide-react";
 
 export function ContactSection() {
-  const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
+  const [form, setForm] = useState({ name: "", company: "", phone: "", message: "" });
   const [sent, setSent] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const text = `Olá! Meu nome é ${form.name}. Email: ${form.email}. Tel: ${form.phone}. Mensagem: ${form.message}`;
+    const text = `Orçamento Comercial - Nome: ${form.name}. Empresa: ${form.company}. Tel: ${form.phone}. Projeto: ${form.message}`;
     window.open(`https://wa.me/5585988543450?text=${encodeURIComponent(text)}`, "_blank");
     setSent(true);
     setTimeout(() => setSent(false), 3000);
   };
 
   const contactInfo = [
-    { icon: Phone, title: "Telefone", value: "(85) 3067-3114", href: "tel:558530673114" },
-    { icon: MessageCircle, title: "WhatsApp", value: "(85) 98854-3450", href: "https://wa.me/5585988543450" },
-    { icon: Mail, title: "Email", value: "rosangela@fsolucoes.com.br", href: "mailto:rosangela@fsolucoes.com.br" },
-    { icon: Instagram, title: "Instagram", value: "@fsolucoes_instalacoes", href: "https://instagram.com/fsolucoes_instalacoes" },
+    { icon: Phone, title: "Central de Vendas", value: "(85) 3067-3114", href: "tel:558530673114" },
+    { icon: ClipboardList, title: "Engenharia (WhatsApp)", value: "(85) 98854-3450", href: "https://wa.me/5585988543450" },
+    { icon: Mail, title: "Projetos Corporativos", value: "contato@fsolucoes.com.br", href: "mailto:contato@fsolucoes.com.br" },
+    { icon: Instagram, title: "Obras em Andamento", value: "@fsolucoes_instalacoes", href: "https://instagram.com/fsolucoes_instalacoes" },
   ];
 
   return (
-    <section id="contato" className="section-padding bg-background relative overflow-hidden">
-      {/* Decorative background glows */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 blur-[120px] rounded-full -z-10" />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-accent/5 blur-[100px] rounded-full -z-10" />
-
-      <div className="container mx-auto relative z-10">
+    <section id="contato" className="section-padding bg-white relative border-t border-[#e2e8f0]">
+      <div className="container mx-auto">
         <ScrollAnimation variant="fadeUp">
-          <div className="text-center mb-16">
-            <span className="text-primary font-heading text-sm font-bold tracking-[0.3em] uppercase">
-              Conexão
+          <div className="text-center mb-16 max-w-2xl mx-auto">
+            <span className="section-tag justify-center">
+              Fale com a Engenharia
             </span>
-            <h2 className="mt-3 font-heading text-4xl md:text-6xl font-black text-foreground uppercase tracking-tight">
-              Fale <span className="text-primary">Conosco</span>
+            <h2 className="heading-display text-4xl md:text-5xl text-[#0d1520] mb-4">
+              SOLICITE UM <span className="text-primary italic">ORÇAMENTO</span>
             </h2>
-            <div className="h-1.5 w-24 bg-primary mx-auto mt-6" />
+            <p className="text-[#64748b] text-base">
+              Nossa equipe técnica está pronta para dimensionar e propor a solução financeira e técnica mais adequada para o seu projeto.
+            </p>
           </div>
         </ScrollAnimation>
 
-        <div className="grid lg:grid-cols-12 gap-12 items-start">
-          {/* Contact info side */}
-          <div className="lg:col-span-5 space-y-6">
+        <div className="grid lg:grid-cols-12 gap-12 items-start max-w-6xl mx-auto">
+          {/* Informações de Contato */}
+          <div className="lg:col-span-5 space-y-8">
             <ScrollAnimation variant="fadeLeft">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+              <div className="space-y-4">
                 {contactInfo.map((item, i) => (
                   <a
                     key={i}
                     href={item.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="glass-card p-6 rounded-2xl hover:border-primary/50 transition-all duration-300 group"
+                    className="flex flex-col p-6 border border-[#e2e8f0] bg-[#f8fafc] hover:border-primary/40 transition-colors group"
                   >
-                    <item.icon className="text-primary mb-3 group-hover:scale-110 transition-transform neon-shadow" size={24} />
-                    <h3 className="font-heading font-black text-xs uppercase tracking-widest text-foreground/70 mb-1">
-                      {item.title}
-                    </h3>
-                    <p className="text-sm font-medium text-foreground truncate">
-                      {item.value}
-                    </p>
+                    <div className="flex items-center gap-4">
+                      <div className="w-10 h-10 bg-white border border-[#e2e8f0] rounded flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+                        <item.icon size={18} />
+                      </div>
+                      <div>
+                        <h3 className="font-heading font-black text-[11px] uppercase tracking-widest text-[#64748b] mb-1">
+                          {item.title}
+                        </h3>
+                        <p className="text-sm font-bold text-[#0d1520]">
+                          {item.value}
+                        </p>
+                      </div>
+                    </div>
                   </a>
                 ))}
               </div>
 
-              {/* Address card */}
-              <div className="glass-card p-8 rounded-2xl mb-8 relative overflow-hidden group">
-                <div className="absolute top-0 left-0 w-1 h-full bg-primary" />
-                <MapPin className="text-primary mb-4 neon-shadow" size={32} />
-                <h3 className="font-heading font-black text-lg uppercase tracking-tight text-foreground mb-3">
-                  Nossa Sede
+              {/* Endereço */}
+              <div className="p-8 border border-[#e2e8f0] bg-white mt-6 relative overflow-hidden">
+                <div className="absolute left-0 top-0 bottom-0 w-1 bg-primary" />
+                <h3 className="font-heading font-black text-sm uppercase tracking-widest text-[#0d1520] mb-4 flex items-center gap-2">
+                  <MapPin size={18} className="text-primary" />
+                  Sede Operacional
                 </h3>
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="text-[#475569] text-sm leading-relaxed">
                   Rua Teofredo Goiana, 763 – A<br />
                   Cidade dos Funcionários<br />
                   Fortaleza – CE, 60822-630
                 </p>
               </div>
-
-              {/* Map container */}
-              <div className="rounded-2xl overflow-hidden shadow-2xl border border-white/5 h-64 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-700">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3981.3!2d-38.49!3d-3.79!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zM8KwNDcnMjQuMCJTIDM4wrAyOSczNi4wIlc!5e0!3m2!1spt-BR!2sbr!4v1"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Localização F. Soluções"
-                />
-              </div>
             </ScrollAnimation>
           </div>
 
-          {/* Form side */}
+          {/* Formulário Corporativo */}
           <div className="lg:col-span-7">
             <ScrollAnimation variant="fadeRight">
-              <TiltCard tiltAmount={5} glare={true} className="rounded-3xl">
-                <form
-                  onSubmit={handleSubmit}
-                  className="glass-card rounded-3xl p-10 md:p-12 space-y-6 relative overflow-hidden h-full"
-                >
-                  {/* Decorative glow */}
-                  <div className="absolute -top-24 -right-24 w-48 h-48 bg-primary/20 blur-[60px] rounded-full" />
-                  
-                  <div className="relative z-10">
-                    <h3 className="font-heading text-2xl md:text-3xl font-black text-foreground uppercase tracking-tight mb-2">
-                      Inicie seu <span className="text-primary">Projeto</span>
-                    </h3>
-                    <p className="text-muted-foreground mb-8 text-sm">
-                      Preencha os campos abaixo e entraremos em contato o mais breve possível.
-                    </p>
-                  </div>
+              <div className="bg-[#050A0C] border border-[#0A1218] p-8 md:p-12 relative overflow-hidden shadow-2xl">
+                
+                {/* Detalhes de design */}
+                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-primary-light to-primary" />
+                <div className="absolute top-0 right-0 p-4 font-heading text-[10px] uppercase tracking-widest text-white/20">
+                  REF. #FS-FRM-01
+                </div>
 
-                  <div className="grid md:grid-cols-2 gap-6 relative z-10">
+                <div className="mb-10">
+                  <h3 className="font-heading text-2xl font-black text-white uppercase tracking-tight mb-2">
+                    Portal do Cliente
+                  </h3>
+                  <p className="text-white/50 text-sm">
+                    Forneça os detalhes da sua demanda para análise técnica prévia.
+                  </p>
+                </div>
+
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="grid md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <label className="text-[10px] font-heading font-black uppercase tracking-[0.2em] text-primary ml-1">
-                        Seu Nome
+                      <label className="text-[10px] font-heading font-black uppercase tracking-widest text-primary">
+                        Nome / Responsável
                       </label>
                       <input
                         type="text"
                         required
                         value={form.name}
                         onChange={(e) => setForm({ ...form, name: e.target.value })}
-                        className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-4 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all placeholder:text-muted-foreground/30"
-                        placeholder="Ex: João Silva"
+                        className="w-full bg-[#0A1218] border border-white/10 text-white px-4 py-3 text-sm focus:outline-none focus:border-primary transition-colors placeholder:text-white/20 rounded-none"
+                        placeholder="Nome completo"
                       />
                     </div>
                     <div className="space-y-2">
-                      <label className="text-[10px] font-heading font-black uppercase tracking-[0.2em] text-primary ml-1">
-                        Seu Email
+                      <label className="text-[10px] font-heading font-black uppercase tracking-widest text-primary">
+                        Empresa
                       </label>
                       <input
-                        type="email"
+                        type="text"
                         required
-                        value={form.email}
-                        onChange={(e) => setForm({ ...form, email: e.target.value })}
-                        className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-4 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all placeholder:text-muted-foreground/30"
-                        placeholder="email@dominio.com"
+                        value={form.company}
+                        onChange={(e) => setForm({ ...form, company: e.target.value })}
+                        className="w-full bg-[#0A1218] border border-white/10 text-white px-4 py-3 text-sm focus:outline-none focus:border-primary transition-colors placeholder:text-white/20 rounded-none"
+                        placeholder="Nome fantasia ou Razão Social"
                       />
                     </div>
                   </div>
 
-                  <div className="space-y-2 relative z-10">
-                    <label className="text-[10px] font-heading font-black uppercase tracking-[0.2em] text-primary ml-1">
-                      Telefone de Contato
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-heading font-black uppercase tracking-widest text-primary">
+                      Telefone (com DDD)
                     </label>
                     <input
                       type="tel"
                       required
                       value={form.phone}
                       onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                      className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-4 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all placeholder:text-muted-foreground/30"
-                      placeholder="(85) 90000-0000"
+                      className="w-full bg-[#0A1218] border border-white/10 text-white px-4 py-3 text-sm focus:outline-none focus:border-primary transition-colors placeholder:text-white/20 rounded-none"
+                      placeholder="(00) 00000-0000"
                     />
                   </div>
 
-                  <div className="space-y-2 relative z-10">
-                    <label className="text-[10px] font-heading font-black uppercase tracking-[0.2em] text-primary ml-1">
-                      Como podemos ajudar?
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-heading font-black uppercase tracking-widest text-primary">
+                      Escopo do Projeto
                     </label>
                     <textarea
                       required
-                      rows={4}
+                      rows={5}
                       value={form.message}
                       onChange={(e) => setForm({ ...form, message: e.target.value })}
-                      className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-4 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all resize-none placeholder:text-muted-foreground/30"
-                      placeholder="Conte-nos um pouco sobre sua necessidade..."
+                      className="w-full bg-[#0A1218] border border-white/10 text-white px-4 py-3 text-sm focus:outline-none focus:border-primary transition-colors placeholder:text-white/20 rounded-none resize-none"
+                      placeholder="Descreva brevemente as necessidades de refrigeração da sua empresa..."
                     />
                   </div>
 
-                  <Button 
+                  <button 
                     type="submit" 
-                    className="w-full py-8 text-sm font-heading font-black uppercase tracking-[0.3em] bg-primary hover:bg-primary-light text-primary-foreground shadow-2xl hover:shadow-primary/20 transition-all duration-300 relative z-10"
+                    className="w-full py-4 text-sm font-heading font-black uppercase tracking-[0.2em] bg-primary hover:bg-primary-light text-white transition-all duration-300"
                   >
-                    {sent ? "Enviado com Sucesso ✓" : "Enviar Agora"}
-                  </Button>
+                    {sent ? "Processando Solicitação ✓" : "Solicitar Análise Técnica"}
+                  </button>
+                  <p className="text-[10px] text-white/30 text-center uppercase tracking-widest">
+                    Um consultor técnico entrará em contato em até 4h úteis.
+                  </p>
                 </form>
-              </TiltCard>
+              </div>
             </ScrollAnimation>
           </div>
         </div>
