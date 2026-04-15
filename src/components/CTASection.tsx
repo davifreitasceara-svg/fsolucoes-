@@ -1,55 +1,45 @@
 import { ScrollAnimation } from "@/components/ScrollAnimation";
-import { ArrowRight, Wrench } from "lucide-react";
-import ctaBg from "@/assets/camara_fria_real_1.jpg";
+import { FloatingParticles } from "@/components/FloatingParticles";
+import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
+import { Magnetic } from "@/components/Magnetic";
+import ctaBg from "@/assets/cta-bg.jpg";
 
 export function CTASection() {
   return (
-    <section className="relative py-28 overflow-hidden bg-secondary">
-      {/* Background corporativo */}
+    <section className="relative py-24 md:py-32 overflow-hidden">
       <div
-        className="absolute inset-0 bg-cover bg-center object-cover opacity-20"
+        className="absolute inset-0 bg-cover bg-center bg-fixed z-0"
         style={{ backgroundImage: `url(${ctaBg})` }}
       />
-      <div className="absolute inset-0 bg-secondary/80 mix-blend-multiply" />
-      
-      {/* Pattern de marca d'água técnica Eletrofrio (grade) */}
-      <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+      <div className="absolute inset-0 bg-black/50" />
+      <FloatingParticles />
 
-      <div className="relative z-10 container mx-auto px-6 text-center">
+      <div className="relative z-10 container mx-auto px-4 text-center">
         <ScrollAnimation variant="fadeUp">
-          <div className="max-w-4xl mx-auto">
-            <div className="flex items-center justify-center gap-3 mb-6">
-              <Wrench className="text-accent" size={24} />
-              <span className="text-white font-heading font-bold text-xs uppercase tracking-[0.3em]">
-                Assistência e Projeto Especializado
-              </span>
-            </div>
-            
-            <h2 className="font-heading font-black text-3xl md:text-5xl lg:text-6xl text-white mb-6 uppercase">
-              POTENCIALIZE SUAS <span className="text-accent">VENDAS</span> COM A REFRIGERAÇÃO IDEAL
-            </h2>
-            
-            <p className="text-lg text-white/80 font-body mb-10 max-w-2xl mx-auto leading-relaxed">
-              Consulte nossos engenheiros para dimensionamento e aplicação de expositores, racks paralelos e centrais térmicas com tecnologia de ponta.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <a 
-                href="#contato"
-                className="bg-accent hover:bg-[#cc0000] text-white px-8 py-4 rounded flex items-center justify-center gap-3 font-heading font-bold uppercase tracking-wide text-sm transition-colors shadow-lg"
-              >
-                Solicitar Cotação
-                <ArrowRight size={18} />
-              </a>
-              <a 
-                href="https://wa.me/5585988543450"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-white hover:bg-gray-100 text-secondary px-8 py-4 rounded flex items-center justify-center gap-3 font-heading font-bold uppercase tracking-wide text-sm transition-colors"
-              >
-                Atendimento Rápido
-              </a>
-            </div>
+          <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-black text-[hsla(207,100%,50%,1)] glow-text uppercase tracking-wide max-w-4xl mx-auto leading-tight" style={{ textShadow: "0 0 20px rgba(0, 102, 255, 0.5)"}}>
+            Transformamos ideias em instalações comerciais eficientes.
+          </h2>
+          <p className="mt-6 text-xl text-white font-heading font-black uppercase tracking-[0.2em] max-w-2xl mx-auto opacity-80 decoration-primary/50 underline-offset-8">
+            Entre em contato com nossa equipe e solicite um projeto para o seu negócio.
+          </p>
+          <div className="mt-12 flex flex-col sm:flex-row gap-6 justify-center">
+            <Magnetic strength={0.3}>
+              <motion.div whileHover={{ scale: 1.05, y: -3 }} whileTap={{ scale: 0.97 }}>
+                <Button variant="hero" size="lg" className="text-lg px-10 py-8 bg-primary hover:bg-primary-light text-primary-foreground shadow-[0_0_20px_hsla(195,100%,50%,0.6)] border border-accent/50" asChild>
+                  <a href="#contato">Solicitar Projeto</a>
+                </Button>
+              </motion.div>
+            </Magnetic>
+            <Magnetic strength={0.3}>
+              <motion.div whileHover={{ scale: 1.05, y: -3 }} whileTap={{ scale: 0.97 }}>
+                <Button variant="whatsapp" size="lg" className="text-base px-8 py-6" asChild>
+                  <a href="https://wa.me/5585988543450" target="_blank" rel="noopener noreferrer">
+                    WhatsApp
+                  </a>
+                </Button>
+              </motion.div>
+            </Magnetic>
           </div>
         </ScrollAnimation>
       </div>

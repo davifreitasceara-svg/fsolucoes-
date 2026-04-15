@@ -170,7 +170,7 @@ export function StatsSection() {
           transition={{ delay: 0.1 }}
           className="font-heading text-4xl md:text-6xl font-black text-white uppercase tracking-tighter"
         >
-          Resultados que <span className="text-primary italic">Falam</span>
+          Eficiência <span className="text-primary italic">Comprovada</span>
         </motion.h2>
       </div>
 
