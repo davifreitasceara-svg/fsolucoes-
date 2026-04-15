@@ -1,149 +1,128 @@
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { ChevronDown, ShieldCheck, ThermometerSnowflake, Settings2 } from "lucide-react";
-import heroBg from "@/assets/camara_fria_real_1.jpg"; // Usando foto real do projeto como fundo
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronRight, Award, Zap, ShieldCheck, Clock, Users } from "lucide-react";
+import heroBg1 from "@/assets/camara_fria_real_1.jpg";
+import heroBg2 from "@/assets/estrutura_real_1.jpg";
+import heroBg3 from "@/assets/estrutura_real_2.jpg";
+import heroBg4 from "@/assets/camara_fria_real_3.jpg";
+import heroBg5 from "@/assets/camara_fria_real_6.jpg";
+
+const slides = [
+  { img: heroBg1, title: "Especialista em", subtitle: "Refrigeração Comercial" },
+  { img: heroBg2, title: "Expositores e", subtitle: "Sistemas Inteligentes" },
+  { img: heroBg3, title: "Qualidade de Ponta", subtitle: "Para Supermercados" },
+  { img: heroBg4, title: "Soluções Térmicas", subtitle: "Para Indústrias" },
+  { img: heroBg5, title: "Engenharia de Frio", subtitle: "Alta Performance" }
+];
+
+const pillars = [
+  { icon: Award, label: "Produtos Otimizados" },
+  { icon: Zap, label: "Alta Eficiência Térmica" },
+  { icon: ShieldCheck, label: "Confiança Total" },
+  { icon: Clock, label: "Instalação Ágil" },
+  { icon: Users, label: "Assitência Diferenciada" }
+];
 
 export function HeroSection() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollY } = useScroll();
-  
-  // Efeito parallax mais sutil
-  const y = useTransform(scrollY, [0, 1000], [0, 300]);
-  const opacity = useTransform(scrollY, [0, 500], [1, 0]);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 5000); // Passa mais rapido (5 segundos)
+    return () => clearInterval(timer);
+  }, []);
 
   return (
-    <section
-      id="inicio"
-      className="relative min-h-[100vh] flex items-center justify-center overflow-hidden bg-[#050A0C]"
-      ref={containerRef}
-    >
-      {/* Background Parallax */}
-      <motion.div 
-        className="absolute inset-0 z-0"
-        style={{ y }}
-      >
-        <div
-          className="absolute inset-0 bg-cover bg-center object-cover scale-105"
-          style={{ backgroundImage: `url(${heroBg})` }}
-        />
-        {/* Overlays corporativos escuros (teal escuro) */}
-        <div className="absolute inset-0 bg-[#001015]/80 mix-blend-multiply z-0" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#001015] via-[#001015]/90 to-transparent z-0" />
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-[0.03] z-0 mix-blend-overlay" />
-      </motion.div>
-
-      {/* Grid Pattern sutil */}
-      <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.03]">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)] bg-[size:64px_64px]" />
-      </div>
-
-      {/* Content */}
-      <div className="relative z-10 w-full container mx-auto px-6 pt-32 pb-20 flex flex-col md:flex-row items-center justify-between">
+    <section id="inicio" className="relative pt-[120px] bg-background">
+      
+      <div className="container mx-auto px-4 pb-20 max-w-[1400px]">
         
-        {/* Left Side - Copy */}
-        <motion.div 
-          className="flex-1 max-w-3xl"
-          style={{ opacity }}
-        >
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="flex items-center gap-3 mb-8"
-          >
-            <div className="h-px w-12 bg-primary"></div>
-            <span className="text-primary font-heading font-bold text-xs uppercase tracking-[0.3em]">
-              Excelência em Instalações Comerciais
-            </span>
-          </motion.div>
-
-          <motion.h1 
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="heading-display text-5xl md:text-7xl lg:text-8xl text-white mb-6"
-          >
-            TECNOLOGIA EM
-            <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
-              REFRIGERAÇÃO
-            </span>
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-lg md:text-xl text-white/60 max-w-2xl font-body leading-relaxed mb-10"
-          >
-            Sistemas completos de câmaras frigoríficas, expositores e engenharia de refrigeração para supermercados e a indústria de alimentos.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-col sm:flex-row gap-5"
-          >
-            <a 
-              href="https://wa.me/5585988543450" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="bg-primary hover:bg-primary-light text-white px-8 py-4 flex items-center justify-center gap-3 font-heading font-bold uppercase tracking-[0.15em] text-sm transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,129,138,0.4)]"
-            >
-              Falar com Engenharia
-              <Settings2 size={16} />
-            </a>
-            <a 
-              href="#projetos"
-              className="px-8 py-4 flex items-center justify-center gap-3 font-heading font-bold uppercase tracking-[0.15em] text-sm text-white/80 border border-white/20 hover:bg-white/5 hover:text-white transition-all duration-300"
-            >
-              Conhecer Projetos
-            </a>
-          </motion.div>
-        </motion.div>
-
-        {/* Right Side - Info Panel (Módulo corporativo) */}
-        <motion.div
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
-          className="hidden lg:flex flex-col gap-4 w-72 mt-20 lg:mt-0"
-        >
-          {/* Card Indicador 1 */}
-          <div className="bg-[#0A1218]/80 backdrop-blur-md border border-white/10 p-5 shrink-0 flex items-start gap-4">
-            <ThermometerSnowflake className="text-primary mt-1" size={24} />
-            <div>
-              <p className="text-primary font-heading font-black text-[10px] uppercase tracking-widest mb-1">Controle Preciso</p>
-              <p className="text-white/70 text-xs leading-relaxed">Alta eficiência energética para grandes volumes.</p>
-            </div>
-          </div>
+        {/* Painel do Slide Principal */}
+        <div className="relative h-[65vh] min-h-[500px] md:h-[75vh] w-full rounded-3xl overflow-hidden shadow-2xl">
           
-          {/* Card Indicador 2 */}
-          <div className="bg-[#0A1218]/80 backdrop-blur-md border border-white/10 p-5 shrink-0 flex items-start gap-4">
-            <ShieldCheck className="text-primary mt-1" size={24} />
-            <div>
-              <p className="text-primary font-heading font-black text-[10px] uppercase tracking-widest mb-1">Garantia Ativa</p>
-              <p className="text-white/70 text-xs leading-relaxed">Suporte técnico especializado 24/7 para sua indústria.</p>
+          <AnimatePresence mode="wait">
+            <motion.div 
+              key={currentSlide}
+              initial={{ opacity: 0, scale: 1.05 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1.5, ease: "easeInOut" }}
+              className="absolute inset-0 bg-cover bg-center"
+              style={{ backgroundImage: `url(${slides[currentSlide].img})` }}
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/60 to-transparent" />
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Painel de Texto de Alta Definicao */}
+          <div className="absolute inset-0 z-10 flex flex-col justify-center px-6 md:px-16 lg:px-24">
+            <motion.div
+              key={`text-${currentSlide}`}
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="max-w-3xl"
+            >
+              {/* Badge Super Clean Eletrofrio */}
+              <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 mb-6">
+                <span className="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
+                <span className="font-heading font-bold text-[10px] text-white uppercase tracking-widest leading-none pt-0.5">
+                  Operando em todo o Brasil
+                </span>
+              </div>
+
+              <h1 className="heading-display text-5xl md:text-6xl lg:text-7xl text-white uppercase mb-6 drop-shadow-xl" style={{ textShadow: "0 4px 30px rgba(0,75,135,0.5)"}}>
+                {slides[currentSlide].title} <br/>
+                <span className="text-accent underline decoration-4 underline-offset-8 decoration-accent/50">{slides[currentSlide].subtitle}</span>
+              </h1>
+              
+              <div className="bg-primary/20 backdrop-blur-sm border-l-4 border-accent p-6 rounded-r-2xl max-w-2xl mb-10 shadow-lg">
+                <p className="font-body text-lg text-white font-semibold leading-relaxed">
+                  Soluções completas para exposição e conservação de alimentos com design, eficiência e tecnologia de ponta. Desenvolvidos lado a lado com a indústria.
+                </p>
+              </div>
+              
+              <div className="flex gap-4">
+                <a href="#servicos" className="btn-cyan shadow-[0_10px_30px_rgba(0,159,227,0.4)] hover:-translate-y-1 transition-all">
+                  Conheça a Linha
+                  <ChevronRight size={20} />
+                </a>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Controle de Dots Modernos (Barrinhas) */}
+          <div className="absolute bottom-8 left-0 w-full flex justify-center gap-2 z-20">
+            {slides.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrentSlide(i)}
+                className={`transition-all duration-500 rounded-full h-1.5 cursor-pointer ${i === currentSlide ? 'w-16 bg-accent' : 'w-6 bg-white/40 hover:bg-white/80'}`}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Pilares Eletrofrio / Sub-Hero Melhorado */}
+        <div className="mt-8 w-full opacity-0 animate-[fade-in-up_0.8s_ease-out_1s_forwards] relative z-20 -top-16 px-4 md:px-12">
+          <div className="bg-white/95 backdrop-blur-md rounded-3xl p-6 sm:p-8 shadow-[0_20px_50px_rgba(0,75,135,0.1)] border border-gray-100 flex items-center">
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-8 flex-1 md:divide-x divide-gray-100">
+              {pillars.map((pillar, i) => (
+                <div key={i} className="flex flex-col items-center justify-center text-center px-2 group cursor-pointer">
+                  <div className="w-14 h-14 bg-gray-50 rounded-full flex items-center justify-center text-primary mb-4 group-hover:bg-accent group-hover:text-white group-hover:-translate-y-2 transition-all duration-300 shadow-sm">
+                    <pillar.icon size={24} strokeWidth={1.5} />
+                  </div>
+                  <h3 className="font-heading font-black text-[11px] text-gray-400 group-hover:text-primary uppercase tracking-widest transition-colors">
+                    {pillar.label}
+                  </h3>
+                </div>
+              ))}
             </div>
           </div>
-        </motion.div>
-      </div>
-
-      {/* Scroll indicator Bottom */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
-        className="absolute bottom-6 left-6 md:left-12 flex items-center gap-4 z-10"
-      >
-        <div className="w-[1px] h-12 bg-white/20 relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-1/3 bg-primary animate-scan" />
         </div>
-        <span className="text-white/40 text-[10px] font-heading font-bold uppercase tracking-[0.4em] rotate-180" style={{ writingMode: 'vertical-rl' }}>
-          Scroll
-        </span>
-      </motion.div>
+
+      </div>
     </section>
   );
 }
