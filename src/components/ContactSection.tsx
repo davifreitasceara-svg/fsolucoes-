@@ -26,7 +26,7 @@ export function ContactSection() {
       {/* Detalhe de background Eletrofrio Pattern */}
       <div className="absolute top-0 right-0 w-1/3 h-full bg-eletro-pattern opacity-5 pointer-events-none rounded-l-[100px]" />
 
-      <div className="container mx-auto px-4 xl:px-56 max-w-[1400px] relative z-10">
+      <div className="container mx-auto px-4 xl:px-40 max-w-[1400px] relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-start bg-white rounded-3xl shadow-lg border border-gray-100 p-6 md:p-16">
           
           <ScrollAnimation variant="fadeRight">

@@ -25,7 +25,7 @@ const segments = [
 export function SegmentsSection() {
   return (
     <section id="segmentos" className="section-padding bg-background relative">
-      <div className="container mx-auto px-4 xl:px-56 max-w-[1400px]">
+      <div className="container mx-auto px-4 xl:px-40 max-w-[1400px]">
         <ScrollAnimation variant="fadeUp">
           <div className="text-center mb-16">
             <h2 className="heading-display text-4xl md:text-5xl uppercase mb-6 text-primary">

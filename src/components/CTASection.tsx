@@ -30,7 +30,7 @@ export function CTASection() {
 
   return (
     <section className="py-24 bg-background relative z-10 perspective-[2000px]">
-      <div className="container mx-auto px-4 xl:px-56 max-w-[1400px]">
+      <div className="container mx-auto px-4 xl:px-40 max-w-[1400px]">
         <ScrollAnimation variant="fadeUp">
           
           <motion.div 
