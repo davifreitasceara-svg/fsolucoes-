@@ -41,19 +41,20 @@ export function AboutSection() {
                         zIndex: cards.length - index,
                         transformStyle: "preserve-3d"
                       }}
-                      initial={{ scale: 0.8, opacity: 0, y: 40 }}
+                      initial={{ scale: 0.8, opacity: 0, y: 40, x: 0, rotateZ: 0 }}
                       animate={{ 
-                        scale: 1 - index * 0.08, 
-                        y: index * -35,
-                        opacity: 1 - index * 0.2,
+                        scale: 1 - index * 0.05, 
+                        y: index * -25,
+                        x: index === 0 ? 0 : index === 1 ? 35 : -35,
+                        opacity: 1 - index * 0.15,
+                        rotateZ: index === 0 ? 0 : index === 1 ? 8 : -8,
                         rotateX: index * -2,
-                        rotateZ: index === 1 ? 2 : index === 2 ? -2 : 0
                       }}
                       exit={{ 
-                        x: 300, 
+                        x: 500, 
                         opacity: 0, 
                         scale: 0.8,
-                        rotate: 20,
+                        rotate: 45,
                         transition: { duration: 0.4 } 
                       }}
                       drag={isFront ? "x" : false}
