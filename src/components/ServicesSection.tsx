@@ -1,4 +1,5 @@
 import { ScrollAnimation } from "@/components/ScrollAnimation";
+import { useNavigate } from "react-router-dom";
 import { ArrowRight, PackageOpen, Download } from "lucide-react";
 import imgExpositores from "@/assets/camara_fria_real_1.jpg";
 import imgCamaras from "@/assets/camara_fria_real_2.jpg";
@@ -37,6 +38,8 @@ const produtos = [
 ];
 
 export function ServicesSection() {
+  const navigate = useNavigate();
+
   return (
     <section id="servicos" className="section-padding bg-background relative border-t border-gray-100">
       
@@ -75,7 +78,10 @@ export function ServicesSection() {
         <div className="grid md:grid-cols-2 gap-8">
           {produtos.map((p, i) => (
             <ScrollAnimation key={i} variant="fadeUp" delay={i * 0.1}>
-              <div className="card-eletro overflow-hidden group flex flex-col sm:flex-row h-full">
+              <div 
+                className="card-eletro overflow-hidden group flex flex-col sm:flex-row h-full cursor-pointer"
+                onClick={() => navigate(p.link)}
+              >
                 
                 {/* Imagem Cover Esquerda ou Top */}
                 <div className="sm:w-2/5 h-64 sm:h-auto overflow-hidden relative">
@@ -104,10 +110,10 @@ export function ServicesSection() {
                     {p.desc}
                   </p>
 
-                  <a href={p.link} className="inline-flex items-center gap-2 font-heading font-black text-accent hover:text-primary transition-colors text-sm uppercase tracking-widest bg-gray-50 hover:bg-gray-100 self-start px-6 py-3 rounded-xl">
+                  <span className="inline-flex items-center gap-2 font-heading font-black text-accent group-hover:text-primary transition-colors text-sm uppercase tracking-widest bg-gray-50 group-hover:bg-gray-100 self-start px-6 py-3 rounded-xl mt-auto">
                     Ver Detalhes
                     <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-                  </a>
+                  </span>
                 </div>
                 
               </div>
