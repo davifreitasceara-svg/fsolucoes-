@@ -12,10 +12,12 @@ import { CTASection } from "@/components/CTASection";
 import { ContactSection } from "@/components/ContactSection";
 import { Footer } from "@/components/Footer";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
+import { FloatingTechnicalHUD } from "@/components/FloatingTechnicalHUD";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
+      <FloatingTechnicalHUD />
       <Header />
       <HeroSection />
       <AboutSection />

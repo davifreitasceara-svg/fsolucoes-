@@ -60,25 +60,33 @@ export function VideoSection() {
             </div>
           </ScrollAnimation>
 
-          {/* As Fotos de Lateral (Stack) */}
-          <div className="lg:col-span-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-6">
+          {/* As Fotos e Vídeo Lateral (Stack) */}
+          <div className="lg:col-span-4 grid grid-cols-1 gap-6">
             <ScrollAnimation variant="scaleIn" delay={0.2} className="h-full">
-              <div className="card-eletro h-[200px] lg:h-[288px] relative overflow-hidden group p-0">
-                <img 
-                  src={imgPrat1} 
-                  alt="Rotina F. Solucoes" 
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-              </div>
-            </ScrollAnimation>
+              <div className="card-eletro h-[500px] lg:h-[600px] relative overflow-hidden group p-0 bg-black shadow-2xl transition-all duration-500 hover:border-accent/40">
+                {/* Fallback link to prevent "connection refused" feelings - creates a professional overlay */}
+                <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                   <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 text-white">
+                      <PlayCircle size={32} />
+                   </div>
+                   <p className="text-white font-body font-bold text-[10px] uppercase tracking-widest mt-4">Ver no Instagram</p>
+                </div>
 
-            <ScrollAnimation variant="scaleIn" delay={0.3} className="h-full">
-              <div className="card-eletro h-[200px] lg:h-[288px] relative overflow-hidden group p-0">
-                <img 
-                  src={imgPrat2} 
-                  alt="Obras F. Solucoes" 
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
+                <iframe 
+                  src="https://www.instagram.com/p/DTurINLgCV-/embed/" 
+                  className="w-full h-full border-none z-0"
+                  allowTransparency
+                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                ></iframe>
+                
+                <a 
+                  href="https://www.instagram.com/reel/DTurINLgCV-/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="absolute inset-x-0 bottom-0 py-4 bg-primary/90 backdrop-blur-sm text-white text-center font-body font-bold text-[10px] uppercase tracking-widest z-20 hover:bg-accent transition-colors"
+                >
+                  Abrir Reel Externo
+                </a>
               </div>
             </ScrollAnimation>
           </div>

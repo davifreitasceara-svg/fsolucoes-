@@ -24,46 +24,36 @@ export function AboutSection() {
                 transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
                 className="relative w-full max-w-md aspect-[4/5] preserve-3d"
               >
-                {/* 3D Card Insta 1 (Trás Direita) */}
-                <div className="absolute top-10 -right-12 sm:-right-20 w-64 aspect-square bg-white p-3 pb-12 rounded-[2rem] shadow-2xl transform translate-z-[-100px] rotate-12 rotate-y-12">
-                  <img src={img2} className="w-full h-full object-cover rounded-xl" alt="Obra 2" />
-                  <div className="absolute bottom-4 left-4 flex gap-2">
-                    <Heart size={16} className="text-gray-400 fill-gray-400" />
-                  </div>
+                {/* Card 1 (Back Right) */}
+                <div className="absolute top-10 -right-12 sm:-right-20 w-64 aspect-square bg-white border border-gray-100 p-2 rounded-xl shadow-2xl transform translate-z-[-100px] rotate-6">
+                  <img src={img2} className="w-full h-full object-cover rounded-lg" alt="Instalação Técnica 2" />
                 </div>
 
-                {/* 3D Card Insta 2 (Trás Esquerda) */}
-                <div className="absolute bottom-10 -left-12 sm:-left-20 w-56 aspect-square bg-white p-3 pb-12 rounded-[2rem] shadow-2xl transform translate-z-[-50px] -rotate-6 -rotate-y-12">
-                  <img src={img3} className="w-full h-full object-cover rounded-xl" alt="Obra 3" />
-                  <div className="absolute bottom-4 left-4 flex gap-2 text-primary font-bold text-xs">
-                    <MapPin size={14}/> Ceará
-                  </div>
+                {/* Card 2 (Back Left) */}
+                <div className="absolute bottom-10 -left-12 sm:-left-20 w-56 aspect-square bg-white border border-gray-100 p-2 rounded-xl shadow-2xl transform translate-z-[-50px] -rotate-3">
+                  <img src={img3} className="w-full h-full object-cover rounded-lg" alt="Instalação Técnica 3" />
                 </div>
 
-                {/* 3D Card Insta 3 (O Principal da frente) */}
-                <div className="absolute inset-0 m-auto w-full h-full max-h-[450px] bg-white p-4 rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,159,227,0.2)] transform translate-z-[50px] flex flex-col">
+                {/* Card 3 (Main Front) */}
+                <div className="absolute inset-0 m-auto w-full h-full max-h-[480px] bg-white p-3 rounded-2xl shadow-[0_30px_60px_rgba(0,0,0,0.12)] border border-gray-100 transform translate-z-[50px] flex flex-col">
+                  {/* Technical identification header instead of instagram */}
+                  <div className="flex items-center justify-between mb-4 px-3 py-1">
+                    <div className="flex items-center gap-2">
+                       <div className="w-2 h-2 rounded-full bg-primary"></div>
+                       <span className="font-body font-bold text-[10px] text-gray-400 uppercase tracking-widest">Field Report // 024</span>
+                    </div>
+                    <span className="font-body font-bold text-[10px] text-primary uppercase">Ceará.BR</span>
+                  </div>
+
+                  <div className="flex-1 rounded-xl overflow-hidden relative group">
+                    <img src={img1} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" alt="Instalação Técnica 1" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent opacity-40"></div>
+                  </div>
                   
-                  {/* Top bar insta fake */}
-                  <div className="flex items-center gap-3 mb-4 px-2">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 flex items-center justify-center p-[2px]">
-                      <div className="w-full h-full bg-white rounded-full flex items-center justify-center">
-                        <Instagram size={18} className="text-gray-800" />
-                      </div>
-                    </div>
-                    <div>
-                      <h4 className="font-heading font-black text-sm text-primary">@fsolucoes_instalacoes</h4>
-                      <p className="text-[10px] text-gray-400">Rotina de Obra</p>
-                    </div>
+                  <div className="mt-4 px-2 pb-2">
+                    <h4 className="font-heading font-black text-primary text-sm uppercase tracking-tight">F. SOLUÇÕES ENGENHARIA</h4>
+                    <p className="text-[10px] text-gray-400 font-medium">Excelência em Refrigeração Industrial</p>
                   </div>
-
-                  {/* Foto Grandona */}
-                  <div className="flex-1 rounded-[1.5rem] overflow-hidden relative group">
-                    <img src={img1} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Obra 1" />
-                    <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                      <Heart size={48} className="text-white drop-shadow-xl" strokeWidth={1} fill="white" />
-                    </div>
-                  </div>
-
                 </div>
 
               </motion.div>
@@ -74,43 +64,33 @@ export function AboutSection() {
           <ScrollAnimation variant="fadeLeft">
             <div className="max-w-xl">
               
-              <div className="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-full border border-gray-100 shadow-sm mb-6">
-                <span className="relative flex h-3 w-3">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-3 w-3 bg-accent"></span>
-                </span>
-                <span className="font-heading font-bold text-xs uppercase tracking-widest text-primary">
-                  Nós Somos a F. Soluções
+              <div className="inline-flex items-center gap-2 bg-gray-50 px-3 py-1.5 rounded border border-gray-100 mb-8">
+                <span className="font-body font-bold text-[10px] uppercase tracking-[0.2em] text-primary">
+                  Institucional
                 </span>
               </div>
 
-              <h2 className="heading-display text-4xl md:text-5xl uppercase leading-[1.1] mb-6">
-                ENGENHARIA REAL. <br/>
-                <span className="text-accent">DIRETO DA OBRA</span>.
+              <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-black text-primary uppercase leading-[1.05] tracking-tighter mb-8">
+                A Engenharia que <br/>
+                <span className="text-accent">Molda o Futuro</span>.
               </h2>
               
-              <p className="font-body text-gray-500 text-lg leading-relaxed mb-8">
-                Esqueça paredes cheias de letras chatas. Nosso negócio acontece no campo, sujando a bota e garantindo que o seu supermercado ou indústria não pare um segundo.
+              <p className="font-body text-gray-600 text-lg md:text-xl leading-relaxed mb-8">
+                Na F. Soluções, a teoria encontra a prática com precisão industrial. Nossa especialidade é transformar projetos complexos em infraestruturas térmicas de alto desempenho, garantindo a continuidade e a eficiência do seu negócio.
               </p>
 
-              <p className="font-body text-gray-500 text-lg leading-relaxed mb-10">
-                Instalamos <strong className="text-primary font-black">centenas de câmaras e rack s</strong> com excelência térmica máxima. Não apenas vendemos equipamentos da <a href="https://jj.ind.br/" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">JJ</a>: somos os especialistas que fazem tudo ganhar vida.
+              <p className="font-body text-gray-600 text-lg leading-relaxed mb-12">
+                Com um histórico de <strong className="text-primary font-bold">centenas de instalações de alto nível</strong>, somos parceiros estratégicos da <a href="https://jj.ind.br/" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline font-bold">JJ</a>, entregando tecnologia de ponta em refrigeração comercial e industrial por todo o Brasil.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-5">
                 <a 
-                  href="https://instagram.com/fsolucoes_instalacoes" 
+                  href="https://wa.me/5585988543450" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="btn-cyan bg-gradient-to-tr from-pink-500 to-accent text-white flex-1"
+                  className="bg-[#004B87] hover:bg-primary text-white px-8 py-3.5 rounded-md font-body font-bold text-sm uppercase tracking-widest transition-all text-center"
                 >
-                  <Instagram size={20} />
-                  Acompanhar no Insta
-                </a>
-                
-                <a href="#servicos" className="btn-outline-cyan flex-1 bg-white">
-                  <Plus size={20} />
-                  Catálogo
+                  Consultar Engenharia
                 </a>
               </div>
 

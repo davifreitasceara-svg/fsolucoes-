@@ -12,28 +12,32 @@ const produtos = [
     desc: "Ilhas, balcões e gôndolas com controle de umidade e alta vazão para supermercados, maximizando o desejo de compra.",
     img: imgExpositores,
     link: "/estruturas",
-    tagline: "Varejo & Padarias"
+    tagline: "Varejo & Padarias",
+    tech: { efficiency: "98.2%", status: "OPTIMAL", id: "JJ-EX-001" }
   },
   {
     title: "Câmaras Frigoríficas",
     desc: "Estruturas dimensionadas para congelamento e resfriamento contínuo em grandes centros de distribuição e fábricas.",
     img: imgCamaras,
     link: "/camaras-frias",
-    tagline: "Armazenagem"
+    tagline: "Armazenagem",
+    tech: { efficiency: "99.1%", status: "ACTIVE", id: "JJ-CF-042" }
   },
   {
     title: "Sistemas de Frio",
     desc: "Racks frigoríficos, centrais de água gelada (Chillers) e automação total com sistemas paralelos.",
     img: imgSistemasFrio,
     link: "/sistemas-frio",
-    tagline: "Engenharia"
+    tagline: "Engenharia",
+    tech: { efficiency: "97.8%", status: "NOMINAL", id: "JJ-SF-900" }
   },
   {
     title: "Painéis Industriais",
     desc: "Fechamentos termoisolantes em EPS e PUR para montagem rápida e contenção segura contra variação térmica.",
     img: imgPaineis,
     link: "/paineis-industriais",
-    tagline: "Infraestrutura"
+    tagline: "Infraestrutura",
+    tech: { efficiency: "100%", status: "STABLE", id: "JJ-PI-220" }
   }
 ];
 
@@ -106,9 +110,36 @@ export function ServicesSection() {
                   
                   <div className="w-12 h-1 bg-accent/20 mb-4 rounded-full group-hover:w-24 transition-all duration-500"></div>
 
-                  <p className="font-body text-gray-500 text-sm mb-8 flex-1 leading-relaxed">
+                  <p className="font-body text-gray-500 text-sm mb-6 flex-1 leading-relaxed">
                     {p.desc}
                   </p>
+
+                  {/* Technical Status Badges */}
+                  <div className="flex flex-wrap gap-3 mb-8">
+                    <div 
+                      className="flex flex-col gap-1 px-3 py-2 bg-gray-50 rounded-lg border border-gray-100 hover:border-accent/30 transition-all cursor-crosshair group/status"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        // Diagnostic animation feedback could be added here
+                      }}
+                    >
+                      <span className="text-[9px] font-mono text-gray-400 uppercase tracking-widest leading-none">Efficiency_Rating</span>
+                      <div className="flex items-center gap-2">
+                         <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                         <span className="text-xs font-mono font-bold text-primary">{p.tech.efficiency}</span>
+                      </div>
+                    </div>
+
+                    <div className="flex flex-col gap-1 px-3 py-2 bg-gray-50 rounded-lg border border-gray-100">
+                      <span className="text-[9px] font-mono text-gray-400 uppercase tracking-widest leading-none">System_Status</span>
+                      <span className="text-xs font-mono font-bold text-primary">{p.tech.status}</span>
+                    </div>
+
+                    <div className="hidden lg:flex flex-col gap-1 px-3 py-2 bg-gray-50 rounded-lg border border-gray-100">
+                      <span className="text-[9px] font-mono text-gray-400 uppercase tracking-widest leading-none">Product_ID</span>
+                      <span className="text-xs font-mono font-bold text-primary opacity-40">{p.tech.id}</span>
+                    </div>
+                  </div>
 
                   <span className="inline-flex items-center gap-2 font-heading font-black text-accent group-hover:text-primary transition-colors text-sm uppercase tracking-widest bg-gray-50 group-hover:bg-gray-100 self-start px-6 py-3 rounded-xl mt-auto">
                     Ver Detalhes

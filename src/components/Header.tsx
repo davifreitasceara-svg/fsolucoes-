@@ -24,8 +24,8 @@ export function Header() {
     <header
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ease-in-out ${
         scrolled
-          ? "bg-white/95 backdrop-blur-md shadow-lg rounded-b-[2rem] py-3"
-          : "bg-white py-5 shadow-sm rounded-b-[2rem]"
+          ? "bg-white/80 backdrop-blur-xl shadow-sm border-b border-gray-200/50 py-4"
+          : "bg-white py-6"
       }`}
     >
       <div className="container mx-auto px-6 max-w-[1400px]">
@@ -44,12 +44,10 @@ export function Header() {
               <a
                 key={item.href}
                 href={item.href}
-                className="flex items-center gap-2 font-heading font-bold text-sm text-primary hover:text-accent transition-colors group"
+                className="relative font-body font-medium text-[15px] text-gray-600 hover:text-primary transition-colors group py-1"
               >
-                <div className="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-primary group-hover:bg-accent group-hover:text-white transition-all duration-300">
-                  <item.icon size={14} />
-                </div>
                 {item.label}
+                <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-primary transition-all duration-300 ease-out group-hover:w-full" />
               </a>
             ))}
             
@@ -57,7 +55,7 @@ export function Header() {
               href="https://wa.me/5585988543450"
               target="_blank"
               rel="noopener noreferrer"
-              className="ml-4 bg-accent hover:bg-[#008bc7] text-white px-6 py-3 rounded-full font-heading font-bold text-sm uppercase tracking-wide transition-all shadow-md hover:shadow-lg"
+              className="ml-6 bg-[#004B87] hover:bg-primary text-white px-6 py-2.5 rounded-md font-body font-medium text-[15px] transition-all shadow-sm hover:shadow-md"
             >
               Falar com Engenharia
             </a>
@@ -82,26 +80,24 @@ export function Header() {
             exit={{ opacity: 0, y: -20, scaleY: 0.9 }}
             className="absolute top-full left-4 right-4 mt-2 bg-white rounded-3xl shadow-2xl lg:hidden overflow-hidden origin-top border border-gray-100"
           >
-            <nav className="flex flex-col p-4">
+            <nav className="flex flex-col p-2">
               {navItems.map((item) => (
                 <a
                   key={item.href}
                   href={item.href}
                   onClick={() => setMobileOpen(false)}
-                  className="flex items-center gap-4 font-heading font-bold text-base text-primary hover:bg-gray-50 hover:text-accent py-4 px-4 rounded-xl transition-colors"
+                  className="flex items-center gap-3 font-body font-medium text-[16px] text-gray-700 hover:bg-gray-50 hover:text-primary py-4 px-4 rounded-lg transition-colors border-b border-gray-100 last:border-0"
                 >
-                  <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-accent">
-                    <item.icon size={18} />
-                  </div>
+                  <item.icon size={18} className="text-gray-400" />
                   {item.label}
                 </a>
               ))}
-              <div className="p-4 border-t border-gray-100 mt-2">
+              <div className="p-4 mt-2">
                 <a
                   href="https://wa.me/5585988543450"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex justify-center items-center h-14 w-full bg-accent text-white rounded-xl font-heading text-sm font-bold shadow-md hover:bg-[#008bc7]"
+                  className="flex justify-center items-center py-3.5 w-full bg-[#004B87] text-white rounded-md font-body font-medium text-[15px] shadow-sm hover:bg-primary transition-colors"
                 >
                   Falar com Engenharia
                 </a>
