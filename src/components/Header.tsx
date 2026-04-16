@@ -5,7 +5,7 @@ import logo from "@/assets/logo.png";
 
 const navItems = [
   { label: "Institucional", href: "#sobre", icon: Building },
-  { label: "Produtos Eletrofrio", href: "#servicos", icon: Package },
+  { label: "Produtos JJ", href: "#servicos", icon: Package },
   { label: "Atendimento", href: "#contato", icon: Phone },
   { label: "Portfólio", href: "#projetos", icon: GraduationCap },
 ];

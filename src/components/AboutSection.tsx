@@ -94,7 +94,7 @@ export function AboutSection() {
               </p>
 
               <p className="font-body text-gray-500 text-lg leading-relaxed mb-10">
-                Instalamos <strong className="text-primary font-black">centenas de câmaras e rack s</strong> com excelência térmica máxima. Não apenas vendemos equipamentos Eletrofrio: somos os especialistas que fazem tudo ganhar vida.
+                Instalamos <strong className="text-primary font-black">centenas de câmaras e rack s</strong> com excelência térmica máxima. Não apenas vendemos equipamentos da <a href="https://jj.ind.br/" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">JJ</a>: somos os especialistas que fazem tudo ganhar vida.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">

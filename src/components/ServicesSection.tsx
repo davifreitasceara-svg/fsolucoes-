@@ -56,7 +56,7 @@ export function ServicesSection() {
                 </span>
               </div>
               <h2 className="heading-display text-4xl md:text-5xl uppercase mb-6">
-                Produtos <span className="text-accent underline decoration-4 underline-offset-4">Eletrofrio</span>
+                Produtos <a href="https://jj.ind.br/" target="_blank" rel="noopener noreferrer" className="text-accent underline decoration-4 underline-offset-4 hover:opacity-80 transition-opacity">JJ</a>
               </h2>
               <p className="font-body text-gray-600 text-lg leading-relaxed">
                 Soluções completas para exposição e conservação de alimentos com design, eficiência e tecnologia de ponta.

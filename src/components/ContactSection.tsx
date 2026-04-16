@@ -8,7 +8,7 @@ export function ContactSection() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const text = `Orçamento Eletrofrio Style - Nome: ${form.name}. Empresa: ${form.company}. Tel: ${form.phone}. Projeto: ${form.message}`;
+    const text = `Orçamento JJ - Nome: ${form.name}. Empresa: ${form.company}. Tel: ${form.phone}. Projeto: ${form.message}`;
     window.open(`https://wa.me/5585988543450?text=${encodeURIComponent(text)}`, "_blank");
     setSent(true);
     setTimeout(() => setSent(false), 3000);
