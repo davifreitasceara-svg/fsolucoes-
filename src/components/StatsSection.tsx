@@ -20,7 +20,7 @@ export function StatsSection() {
   return (
     <section className="section-padding bg-white relative border-t border-gray-100">
       
-      <div className="container mx-auto px-4 max-w-[1400px]">
+      <div className="container mx-auto px-4 xl:px-40 max-w-[1400px]">
         {/* Superior: Título Direto e Reto */}
         <div className="flex flex-col md:flex-row justify-between items-end mb-12 border-b border-gray-200 pb-8 gap-6">
           <ScrollAnimation variant="fadeRight">

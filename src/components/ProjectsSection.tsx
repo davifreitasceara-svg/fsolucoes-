@@ -23,7 +23,7 @@ export function ProjectsSection() {
 
   return (
     <section id="projetos" className="section-padding bg-background relative border-t border-gray-100">
-      <div className="container mx-auto px-4 max-w-[1400px]">
+      <div className="container mx-auto px-4 xl:px-56 max-w-[1400px]">
         <ScrollAnimation variant="fadeUp">
           <div className="flex flex-col md:flex-row justify-between items-end mb-16 border-b border-gray-200 pb-8">
             <div>

@@ -8,7 +8,7 @@ export function WhyUsSection() {
       
       <div className="absolute -top-[20%] -right-[10%] w-[600px] h-[600px] rounded-full bg-accent/20 blur-3xl mix-blend-screen pointer-events-none" />
 
-      <div className="container mx-auto px-4 max-w-[1400px] relative z-10">
+      <div className="container mx-auto px-4 xl:px-56 max-w-[1400px] relative z-10">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           
           <ScrollAnimation variant="fadeRight">

@@ -36,7 +36,7 @@ export function HeroSection() {
   return (
     <section id="inicio" className="relative pt-[120px] bg-background">
       
-      <div className="container mx-auto px-4 pb-20 max-w-[1400px]">
+      <div className="container mx-auto px-4 xl:px-40 pb-20 max-w-[1400px]">
         
         {/* Painel do Slide Principal */}
         <div className="relative h-[65vh] min-h-[500px] md:h-[75vh] w-full rounded-2xl overflow-hidden shadow-2xl">

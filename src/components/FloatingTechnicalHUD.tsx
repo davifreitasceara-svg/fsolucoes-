@@ -57,10 +57,10 @@ function TechFrame({ frame, scrollProgress }: { frame: any, scrollProgress: any 
       style={{ 
         opacity,
         y,
-        [frame.side]: "2.5rem",
+        [frame.side]: "var(--hud-side-offset)",
         top: frame.top
       }}
-      className="fixed w-56 hidden xl:flex flex-col z-40 pointer-events-none"
+      className="fixed w-40 3xl:w-56 hidden xl:flex flex-col z-40 pointer-events-none [--hud-side-offset:0.5rem] 3xl:[--hud-side-offset:2.5rem]"
     >
       {/* Side Label */}
       <div className={`absolute top-0 text-[10px] font-mono text-primary font-bold uppercase tracking-[0.3em] ${frame.side === 'right' ? '-left-10' : '-right-10'}`} style={{ writingMode: 'vertical-rl' }}>

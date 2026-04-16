@@ -7,7 +7,7 @@ import { PlayCircle } from "lucide-react";
 export function VideoSection() {
   return (
     <section className="section-padding bg-background relative overflow-hidden">
-      <div className="container mx-auto px-4 max-w-[1400px]">
+      <div className="container mx-auto px-4 xl:px-56 max-w-[1400px]">
         
         {/* Cabecalho Simples Eletrofrio */}
         <div className="flex flex-col md:flex-row justify-between md:items-end mb-16 gap-6">

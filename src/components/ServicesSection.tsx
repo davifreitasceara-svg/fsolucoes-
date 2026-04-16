@@ -50,7 +50,7 @@ export function ServicesSection() {
       {/* Decorative large circle left */}
       <div className="absolute top-[10%] -left-[10%] w-[500px] h-[500px] rounded-full bg-accent/5 blur-3xl mix-blend-multiply pointer-events-none" />
 
-      <div className="container mx-auto px-4 max-w-[1400px] relative z-10">
+      <div className="container mx-auto px-4 xl:px-40 max-w-[1400px] relative z-10">
         
         {/* Cabecalho da Secao estilo Eletrofrio Produtos */}
         <ScrollAnimation variant="fadeUp">

@@ -24,7 +24,7 @@ export function AboutSection() {
 
   return (
     <section id="sobre" className="section-padding bg-background relative overflow-hidden">
-      <div className="container mx-auto px-4 max-w-[1400px]">
+      <div className="container mx-auto px-4 xl:px-40 max-w-[1400px]">
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
           
           {/* Lado Esquerdo: 3D Swipeable Stack */}

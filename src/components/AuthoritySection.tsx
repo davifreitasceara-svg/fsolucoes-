@@ -20,7 +20,7 @@ export function AuthoritySection() {
       <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
       <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
 
-      <div className="container mx-auto">
+      <div className="container mx-auto xl:px-40">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {stats.map((stat, i) => (
             <ScrollAnimation key={stat.label} variant="fadeUp" delay={i * 0.2}>
