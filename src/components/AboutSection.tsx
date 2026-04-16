@@ -1,81 +1,97 @@
+import { useState } from "react";
 import { ScrollAnimation } from "@/components/ScrollAnimation";
-import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
-import { Instagram, MapPin, Heart, Plus } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Plus, MoveRight } from "lucide-react";
 import img1 from "@/assets/camara_fria_real_1.jpg";
 import img2 from "@/assets/estrutura_real_2.jpg";
 import img3 from "@/assets/camara_fria_real_3.jpg";
 
 export function AboutSection() {
-  // Configuração para interatividade 3D sensível ao toque
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
+  const [cards, setCards] = useState([
+    { id: 1, img: img1, label: "Field Report // 024", loc: "Ceará.BR", title: "INSTALAÇÃO TÉCNICA 1" },
+    { id: 2, img: img2, label: "Field Report // 025", loc: "Fortaleza.CE", title: "CONTROLE DE QUALIDADE" },
+    { id: 3, img: img3, label: "Field Report // 026", loc: "Eusébio.BR", title: "MONTAGEM INDUSTRIAL" },
+  ]);
 
-  // Mapeia o movimento do mouse/dedo para ângulos de rotação 3D
-  const rotateX = useTransform(y, [100, -100], [30, -30]);
-  const rotateY = useTransform(x, [-100, 100], [-30, 30]);
-
-  // Aplica suavização (mola) nas rotações
-  const springConfig = { damping: 20, stiffness: 150 };
-  const springRotateX = useSpring(rotateX, springConfig);
-  const springRotateY = useSpring(rotateY, springConfig);
+  const moveToEnd = () => {
+    setCards((prevCards) => {
+      const newCards = [...prevCards];
+      const firstCard = newCards.shift()!;
+      newCards.push(firstCard);
+      return newCards;
+    });
+  };
 
   return (
     <section id="sobre" className="section-padding bg-background relative overflow-hidden">
       <div className="container mx-auto px-4 max-w-[1400px]">
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
           
-          {/* Lado Esquerdo: 3D Interactive Collage */}
-          <div className="relative h-[500px] md:h-[600px] w-full flex items-center justify-center perspective-[1200px]">
-            <ScrollAnimation variant="scaleIn" className="absolute w-full h-full flex items-center justify-center">
-              
-              <motion.div 
-                drag
-                dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
-                dragElastic={0.6}
-                whileTap={{ scale: 0.98, cursor: "grabbing" }}
-                style={{ 
-                  x, 
-                  y, 
-                  rotateX: springRotateX, 
-                  rotateY: springRotateY,
-                  transformStyle: "preserve-3d"
-                }}
-                className="relative w-full max-w-md aspect-[4/5] cursor-grab"
-              >
-                {/* Card 1 (Back Right) */}
-                <div className="absolute top-10 -right-12 sm:-right-20 w-64 aspect-square bg-white border border-gray-100 p-2 rounded-xl shadow-2xl transform translate-z-[-100px] rotate-6">
-                  <img src={img2} className="w-full h-full object-cover rounded-lg" alt="Instalação Técnica 2" />
-                </div>
-
-                {/* Card 2 (Back Left) */}
-                <div className="absolute bottom-10 -left-12 sm:-left-20 w-56 aspect-square bg-white border border-gray-100 p-2 rounded-xl shadow-2xl transform translate-z-[-50px] -rotate-3">
-                  <img src={img3} className="w-full h-full object-cover rounded-lg" alt="Instalação Técnica 3" />
-                </div>
-
-                {/* Card 3 (Main Front) */}
-                <div className="absolute inset-0 m-auto w-full h-full max-h-[480px] bg-white p-3 rounded-2xl shadow-[0_30px_60px_rgba(0,0,0,0.12)] border border-gray-100 transform translate-z-[50px] flex flex-col">
-                  {/* Technical identification header */}
-                  <div className="flex items-center justify-between mb-4 px-3 py-1">
-                    <div className="flex items-center gap-2">
-                       <div className="w-2 h-2 rounded-full bg-primary"></div>
-                       <span className="font-body font-bold text-[10px] text-gray-400 uppercase tracking-widest">Field Report // 024</span>
-                    </div>
-                    <span className="font-body font-bold text-[10px] text-primary uppercase">Ceará.BR</span>
-                  </div>
-
-                  <div className="flex-1 rounded-xl overflow-hidden relative group">
-                    <img src={img1} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" alt="Instalação Técnica 1" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent opacity-40"></div>
-                  </div>
+          {/* Lado Esquerdo: 3D Swipeable Stack */}
+          <div className="relative h-[550px] md:h-[650px] w-full flex items-center justify-center perspective-[1500px]">
+            <div className="relative w-full max-w-[380px] h-[480px]">
+              <AnimatePresence initial={false}>
+                {cards.map((card, index) => {
+                  const isFront = index === 0;
                   
-                  <div className="mt-4 px-2 pb-2">
-                    <h4 className="font-heading font-black text-primary text-sm uppercase tracking-tight">F. SOLUÇÕES ENGENHARIA</h4>
-                    <p className="text-[10px] text-gray-400 font-medium">Excelência em Refrigeração Industrial</p>
-                  </div>
-                </div>
+                  return (
+                    <motion.div
+                      key={card.id}
+                      style={{ 
+                        zIndex: cards.length - index,
+                        transformStyle: "preserve-3d"
+                      }}
+                      initial={{ scale: 0.8, opacity: 0, y: 40 }}
+                      animate={{ 
+                        scale: 1 - index * 0.08, 
+                        y: index * -35,
+                        opacity: 1 - index * 0.2,
+                        rotateX: index * -2,
+                        rotateZ: index === 1 ? 2 : index === 2 ? -2 : 0
+                      }}
+                      exit={{ 
+                        x: 300, 
+                        opacity: 0, 
+                        scale: 0.8,
+                        rotate: 20,
+                        transition: { duration: 0.4 } 
+                      }}
+                      drag={isFront ? "x" : false}
+                      dragConstraints={{ left: 0, right: 0 }}
+                      onDragEnd={(_, info) => {
+                        if (Math.abs(info.offset.x) > 100) moveToEnd();
+                      }}
+                      className={`absolute inset-0 m-auto w-full h-full bg-white p-3 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-gray-100 flex flex-col ${isFront ? 'cursor-grab active:cursor-grabbing shadow-[0_30px_60px_rgba(0,0,0,0.15)]' : ''}`}
+                    >
+                      {/* Technical header */}
+                      <div className="flex items-center justify-between mb-4 px-3 py-1">
+                        <div className="flex items-center gap-2">
+                           <div className="w-2 h-2 rounded-full bg-primary"></div>
+                           <span className="font-body font-bold text-[10px] text-gray-400 uppercase tracking-widest">{card.label}</span>
+                        </div>
+                        <span className="font-body font-bold text-[10px] text-primary uppercase">{card.loc}</span>
+                      </div>
 
-              </motion.div>
-            </ScrollAnimation>
+                      <div className="flex-1 rounded-xl overflow-hidden relative">
+                        <img src={card.img} className="w-full h-full object-cover" alt={card.title} />
+                        <div className="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent opacity-40"></div>
+                        
+                        {isFront && (
+                          <div className="absolute bottom-4 right-4 bg-white/90 backdrop-blur rounded-full p-2 shadow-lg animate-pulse">
+                            <MoveRight size={16} className="text-primary" />
+                          </div>
+                        )}
+                      </div>
+                      
+                      <div className="mt-4 px-2 pb-2">
+                        <h4 className="font-heading font-black text-primary text-sm uppercase tracking-tight">{card.title}</h4>
+                        <p className="text-[10px] text-gray-400 font-medium">REGISTRO F. SOLUÇÕES // {new Date().getFullYear()}</p>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </AnimatePresence>
+            </div>
           </div>
 
           {/* Lado Direito: Texto Reduzido, Dinâmico e "Fun" */}
