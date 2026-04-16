@@ -1,28 +1,46 @@
 import { ScrollAnimation } from "@/components/ScrollAnimation";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
 import { Instagram, MapPin, Heart, Plus } from "lucide-react";
 import img1 from "@/assets/camara_fria_real_1.jpg";
 import img2 from "@/assets/estrutura_real_2.jpg";
 import img3 from "@/assets/camara_fria_real_3.jpg";
 
 export function AboutSection() {
+  // Configuração para interatividade 3D sensível ao toque
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  // Mapeia o movimento do mouse/dedo para ângulos de rotação 3D
+  const rotateX = useTransform(y, [100, -100], [30, -30]);
+  const rotateY = useTransform(x, [-100, 100], [-30, 30]);
+
+  // Aplica suavização (mola) nas rotações
+  const springConfig = { damping: 20, stiffness: 150 };
+  const springRotateX = useSpring(rotateX, springConfig);
+  const springRotateY = useSpring(rotateY, springConfig);
+
   return (
     <section id="sobre" className="section-padding bg-background relative overflow-hidden">
       <div className="container mx-auto px-4 max-w-[1400px]">
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
           
-          {/* Lado Esquerdo: 3D Instagram Collage */}
+          {/* Lado Esquerdo: 3D Interactive Collage */}
           <div className="relative h-[500px] md:h-[600px] w-full flex items-center justify-center perspective-[1200px]">
             <ScrollAnimation variant="scaleIn" className="absolute w-full h-full flex items-center justify-center">
               
               <motion.div 
-                animate={{ 
-                  y: [-10, 10, -10],
-                  rotateX: [10, 15, 10], 
-                  rotateY: [-20, -15, -20] 
+                drag
+                dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
+                dragElastic={0.6}
+                whileTap={{ scale: 0.98, cursor: "grabbing" }}
+                style={{ 
+                  x, 
+                  y, 
+                  rotateX: springRotateX, 
+                  rotateY: springRotateY,
+                  transformStyle: "preserve-3d"
                 }}
-                transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
-                className="relative w-full max-w-md aspect-[4/5] preserve-3d"
+                className="relative w-full max-w-md aspect-[4/5] cursor-grab"
               >
                 {/* Card 1 (Back Right) */}
                 <div className="absolute top-10 -right-12 sm:-right-20 w-64 aspect-square bg-white border border-gray-100 p-2 rounded-xl shadow-2xl transform translate-z-[-100px] rotate-6">
@@ -36,7 +54,7 @@ export function AboutSection() {
 
                 {/* Card 3 (Main Front) */}
                 <div className="absolute inset-0 m-auto w-full h-full max-h-[480px] bg-white p-3 rounded-2xl shadow-[0_30px_60px_rgba(0,0,0,0.12)] border border-gray-100 transform translate-z-[50px] flex flex-col">
-                  {/* Technical identification header instead of instagram */}
+                  {/* Technical identification header */}
                   <div className="flex items-center justify-between mb-4 px-3 py-1">
                     <div className="flex items-center gap-2">
                        <div className="w-2 h-2 rounded-full bg-primary"></div>
