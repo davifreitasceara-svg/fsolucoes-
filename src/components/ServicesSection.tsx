@@ -10,28 +10,28 @@ const produtos = [
     title: "Expositores Refrigerados",
     desc: "Ilhas, balcões e gôndolas com controle de umidade e alta vazão para supermercados, maximizando o desejo de compra.",
     img: imgExpositores,
-    link: "#",
+    link: "/estruturas",
     tagline: "Varejo & Padarias"
   },
   {
     title: "Câmaras Frigoríficas",
     desc: "Estruturas dimensionadas para congelamento e resfriamento contínuo em grandes centros de distribuição e fábricas.",
     img: imgCamaras,
-    link: "#",
+    link: "/camaras-frias",
     tagline: "Armazenagem"
   },
   {
     title: "Sistemas de Frio",
     desc: "Racks frigoríficos, centrais de água gelada (Chillers) e automação total com sistemas paralelos.",
     img: imgSistemasFrio,
-    link: "#",
+    link: "/sistemas-frio",
     tagline: "Engenharia"
   },
   {
     title: "Painéis Industriais",
     desc: "Fechamentos termoisolantes em EPS e PUR para montagem rápida e contenção segura contra variação térmica.",
     img: imgPaineis,
-    link: "#",
+    link: "/paineis-industriais",
     tagline: "Infraestrutura"
   }
 ];
