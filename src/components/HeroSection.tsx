@@ -72,8 +72,8 @@ export function HeroSection() {
               </div>
 
               <h1 className="font-heading text-6xl md:text-8xl lg:text-[7rem] text-white font-black leading-[0.9] tracking-tighter uppercase mb-8">
-                FUTURE <br/>
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-white/40">COLD.</span>
+                F. <br/>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-white/40">SOLUÇÕES.</span>
               </h1>
 
               <div className="max-w-md mb-12">
@@ -111,35 +111,43 @@ export function HeroSection() {
               <div className="absolute inset-0 border border-white/10 rounded-full animate-[spin_20s_linear_infinite] scale-125 pointer-events-none" />
               <div className="absolute inset-0 border border-accent/20 rounded-full animate-[spin_15s_linear_reverse_infinite] scale-110 pointer-events-none" />
 
-              {/* A MÁSCARA "F" */}
-              <div className="absolute inset-0 letter-mask-f z-20 bg-black/20 backdrop-blur-sm overflow-hidden flex items-center justify-center">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={currentSlide}
-                    initial={{ opacity: 0, scale: 1.2 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.9 }}
-                    transition={{ duration: 1, ease: "easeInOut" }}
-                    className="absolute inset-0 bg-cover bg-center"
-                    style={{ backgroundImage: `url(${slides[currentSlide].img})` }}
-                  >
-                    <div className="absolute inset-0 bg-accent/20 mix-blend-overlay" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                  </motion.div>
-                </AnimatePresence>
+              {/* O MESTRE "F" COM PROFUNDIDADE 3D */}
+              <div className="absolute inset-0 z-20 overflow-hidden flex items-center justify-center pointer-events-none" style={{ transform: "translateZ(80px)", transformStyle: "preserve-3d" }}>
                 
-                {/* Overlay Scanning Line dentro do F */}
-                <motion.div 
-                  animate={{ top: ['-20%', '120%'] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                  className="absolute left-0 right-0 h-[3px] bg-accent/60 shadow-[0_0_20px_rgba(0,159,227,0.8)] z-30"
-                />
+                {/* Camada de Profundidade (Sombra/Extrusão) */}
+                <div className="absolute inset-0 letter-mask-f bg-primary/40 blur-[2px]" style={{ transform: "translateZ(-15px) translateX(10px) translateY(10px)" }} />
+                <div className="absolute inset-0 letter-mask-f bg-primary/20 blur-[1px]" style={{ transform: "translateZ(-8px) translateX(5px) translateY(5px)" }} />
+                
+                {/* Camada Principal do Mask (Vídeo) */}
+                <div className="absolute inset-0 letter-mask-f bg-black/20 backdrop-blur-sm overflow-hidden flex items-center justify-center shadow-2xl">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={currentSlide}
+                      initial={{ opacity: 0, scale: 1.2 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.9 }}
+                      transition={{ duration: 1, ease: "easeInOut" }}
+                      className="absolute inset-0 bg-cover bg-center"
+                      style={{ backgroundImage: `url(${slides[currentSlide].img})` }}
+                    >
+                      <div className="absolute inset-0 bg-accent/20 mix-blend-overlay" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                    </motion.div>
+                  </AnimatePresence>
+                  
+                  {/* Overlay Scanning Line dentro do F */}
+                  <motion.div 
+                    animate={{ top: ['-20%', '120%'] }}
+                    transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                    className="absolute left-0 right-0 h-[3px] bg-accent/60 shadow-[0_0_20px_rgba(0,159,227,0.8)] z-30"
+                  />
+                </div>
               </div>
 
-              {/* Letter Border (Outro "F" só o contorno) - Efeito Glow */}
-              <div className="absolute inset-0 z-30 pointer-events-none">
-                 <svg viewBox="0 0 100 100" className="w-full h-full opacity-30 drop-shadow-[0_0_15px_rgba(0,159,227,1)]">
-                    <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle" font-family="Montserrat" fontWeight="900" fontSize="110" fill="none" stroke="currentColor" strokeWidth="0.5" className="text-accent italic">F</text>
+              {/* Letter Border (Outro "F" só o contorno) - Efeito Glow Superior */}
+              <div className="absolute inset-0 z-30 pointer-events-none" style={{ transform: "translateZ(100px)" }}>
+                 <svg viewBox="0 0 100 100" className="w-full h-full opacity-60 drop-shadow-[0_0_20px_rgba(0,159,227,1)]">
+                    <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle" font-family="Montserrat" fontWeight="900" fontSize="110" fill="none" stroke="currentColor" strokeWidth="0.8" className="text-accent italic">F</text>
                  </svg>
               </div>
 
